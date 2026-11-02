@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { computed, inject, Service, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { AuthResponse, SignInRequest, User } from '../models';
+import { AuthResponse, CurrentResponse, SignInRequest, User } from '../models';
 
 @Service()
 export class Auth {
@@ -16,7 +16,17 @@ export class Auth {
         localStorage.setItem('token', user.token);
         this._user.set({ name: user.name, email: user.email });
       },
+      error: (error) => {
+        console.error('Error',error.message);
+      }
     });
+  }
 
+  getCurrent() {
+    return this.http.get<CurrentResponse>(environment.apiUrl + '/users/current')
+      .subscribe({
+      next: (user) => {
+        console.log(user);}
+    });
   }
 }
