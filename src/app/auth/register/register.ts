@@ -1,16 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { Auth } from '../auth';
 import { Router, RouterLink } from '@angular/router';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { JsonPipe } from '@angular/common';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
-  imports: [ReactiveFormsModule, RouterLink, JsonPipe],
+  imports: [ReactiveFormsModule, RouterLink],
   selector: 'app-register',
   styleUrl: './register.scss',
   templateUrl: './register.html',

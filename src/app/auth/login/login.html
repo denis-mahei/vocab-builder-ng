@@ -1,29 +1,30 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-  <input type="email" formControlName="email"/>
-  @if (email.invalid && (email.dirty || email.touched)) {
-    <div>
-      @if (email.hasError('required')) {
-        <p style="color: red">Email is required!</p>
-      }
-      @if (email.hasError('email')) {
-        <p style="color: red; font-size: 12px">Enter a valid email, e.g. name&#64;mail.com</p>
-      }
-    </div>
-  }
-  <input type="password" formControlName="password"/>
-  @if (password.invalid && (password.dirty || password.touched)) {
-    <div>
-      @if (password.hasError('required')) {
-        <p style="color: red">Password is required!</p>
-      }
-      @if (password.hasError('pattern')) {
-        <p style="color: red">Password must contain 6 English letters and 1 number</p>
-      }
-    </div>
-  }
-  @if (password.valid) {
-    <p style="color: green">Success password</p>
-  }
-  <button type="submit">login</button>
-</form>
-<a routerLink="/register">SignUp</a>
+<div class="container">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <input type="email" formControlName="email"/>
+    @if (email.invalid && (email.dirty || email.touched)) {
+      <div>
+        @if (email.hasError('required')) {
+          <p style="color: red">Email is required!</p>
+        }
+        @if (email.hasError('email')) {
+          <p style="color: red; font-size: 12px">Enter a valid email, e.g. name&#64;mail.com</p>
+        }
+      </div>
+    }
+    <input type="password" formControlName="password"/>
+    @if (password.invalid && (password.dirty || password.touched)) {
+      <div>
+        @if (password.hasError('required')) {
+          <p style="color: red">Password is required!</p>
+        }
+        @if (password.hasError('pattern')) {
+          <p style="color: red">Password must contain 6 English letters and 1 number</p>
+        }
+      </div>
+    }
+    @if (password.valid) {
+      <p style="color: green">Success password</p>
+    }
+    <button type="submit">login</button>
+  </form>
+  <a routerLink="/register">SignUp</a></div>
