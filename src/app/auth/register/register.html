@@ -1,5 +1,5 @@
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-  <input type="text" formControlName="name" minlength="3">
+  <input type="text" formControlName="name" minlength="3" class="input">
   @if (name.invalid && (name.touched || name.dirty)) {
     <div>
       @if (name.hasError('required')) {
@@ -10,7 +10,7 @@
       }
     </div>
   }
-  <input type="email" formControlName="email">
+  <input type="email" formControlName="email" class="input">
 
   @if (email.invalid
   && (email.dirty
@@ -24,7 +24,7 @@
       }
     </div>
   }
-  <input type="text" formControlName="password">
+  <input type="text" formControlName="password" class="input">
   @if (password.invalid
   && (password.dirty
     || password.touched)) {

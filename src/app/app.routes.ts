@@ -4,6 +4,7 @@ import { Dictionary } from './dictionary/dictionary';
 import { authGuard } from './auth/auth-guard';
 import { guestGuard } from './auth/guest-guard';
 import { Register } from './auth/register/register';
+import { AuthLayout } from './auth/auth-layout/auth-layout';
 
 export const routes: Routes = [
   {
@@ -12,15 +13,19 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'register',
-    component: Register,
+    path: '',
+    component: AuthLayout,
     canActivate: [guestGuard],
-  }
-  ,
-  {
-    path: 'login',
-    component: Login,
-    canActivate: [guestGuard],
+    children: [
+      {
+        path: 'register',
+        component: Register,
+      },
+      {
+        path: 'login',
+        component: Login,
+      },
+    ],
   },
   {
     path: 'dictionary',
