@@ -1,12 +1,7 @@
+@use "reset";
 @use "breakpoints" as *;
 @use "tokens";
 @use "fonts";
-
-*,
-::before,
-::after {
-  box-sizing: border-box;
-}
 
 .container {
   padding-inline: 16px;
