@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { computed, inject, Service, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { AuthResponse, CurrentResponse, SignInRequest, User } from '../models';
-import { catchError, Observable, of, tap } from 'rxjs';
+import { catchError, finalize, Observable, of, tap } from 'rxjs';
 
 @Service()
 export class Auth {
@@ -19,19 +19,27 @@ export class Auth {
       }),
     );
   }
-
   getCurrent(): Observable<CurrentResponse | null> {
     const token = localStorage.getItem('token');
     if (!token) {
       return of(null);
     }
-    return this.http.get<CurrentResponse>(environment.apiUrl + '/users/current')
-      .pipe(
+    return this.http.get<CurrentResponse>(environment.apiUrl + '/users/current').pipe(
       tap((current) => this._user.set({ name: current.name, email: current.email })),
       catchError(() => {
         localStorage.removeItem('token');
         return of(null);
       }),
     );
+  }
+  signOut() {
+    return this.http
+      .post(environment.apiUrl + '/users/signout', null)
+      .pipe(
+        finalize(() => {
+          localStorage.removeItem('token');
+          this._user.set(null);
+        }),
+      )
   }
 }
