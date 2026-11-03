@@ -1,10 +1,15 @@
 import { Component, inject } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Auth } from '../auth';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   selector: 'app-login',
   styleUrl: './login.scss',
   templateUrl: './login.html',
@@ -20,13 +25,23 @@ export class Login {
     }),
     password: new FormControl('', {
       nonNullable: true,
-      validators: Validators.required,
+      validators: [
+        Validators.required,
+        Validators.pattern(/^(?=.*[a-zA-Z]{6})(?=.*\d)[a-zA-Z\d]{7}$/),
+      ],
     }),
   });
 
+  get email() {
+    return this.loginForm.controls.email;
+  }
+
+  get password() {
+    return this.loginForm.controls.password;
+  }
+
   onSubmit() {
-    this.auth.signIn(this.loginForm.getRawValue())
-      .subscribe({
+    this.auth.signIn(this.loginForm.getRawValue()).subscribe({
       next: () => this.router.navigate(['/dictionary']),
     });
   }

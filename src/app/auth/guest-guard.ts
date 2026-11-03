@@ -5,5 +5,5 @@ import { Auth } from './auth';
 export const guestGuard: CanActivateFn = () => {
   const auth = inject(Auth)
   const router = inject(Router)
-  return auth.isLoggedIn() ? router.navigate(['/dictionary']) : true
+  return auth.isLoggedIn() ? router.createUrlTree(['/dictionary']) : true
 };
