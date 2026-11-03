@@ -1,9 +1,4 @@
 <main>
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <input type="email" formControlName="email"/>
-    <input type="password" formControlName="password"/>
-    <button type="submit">login</button>
-  </form>
   <h1>Name: {{auth.user()?.name}}</h1>
   <router-outlet></router-outlet>
 </main>

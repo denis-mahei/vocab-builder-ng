@@ -11,16 +11,13 @@ export class Auth {
   readonly user = this._user.asReadonly();
   readonly isLoggedIn = computed(() => this._user() !== null);
 
-  signIn(credentials: SignInRequest) {
-    this.http.post<AuthResponse>(environment.apiUrl + '/users/signin', credentials).subscribe({
-      next: (user) => {
-        localStorage.setItem('token', user.token);
-        this._user.set({ name: user.name, email: user.email });
-      },
-      error: (error) => {
-        console.error('Error', error.message);
-      },
-    });
+  signIn(credentials: SignInRequest): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(environment.apiUrl + '/users/signin', credentials).pipe(
+      tap((current) => {
+        localStorage.setItem('token', current.token);
+        this._user.set({ name: current.name, email: current.email });
+      }),
+    );
   }
 
   getCurrent(): Observable<CurrentResponse | null> {
@@ -28,7 +25,8 @@ export class Auth {
     if (!token) {
       return of(null);
     }
-    return this.http.get<CurrentResponse>(environment.apiUrl + '/users/current').pipe(
+    return this.http.get<CurrentResponse>(environment.apiUrl + '/users/current')
+      .pipe(
       tap((current) => this._user.set({ name: current.name, email: current.email })),
       catchError(() => {
         localStorage.removeItem('token');
@@ -37,4 +35,3 @@ export class Auth {
     );
   }
 }
-

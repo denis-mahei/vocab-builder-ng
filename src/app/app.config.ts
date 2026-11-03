@@ -1,5 +1,6 @@
 import {
-  ApplicationConfig, inject,
+  ApplicationConfig,
+  inject,
   provideAppInitializer,
   provideBrowserGlobalErrorListeners,
 } from '@angular/core';
@@ -15,8 +16,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(withInterceptors([authInterceptor])),
     provideAppInitializer(() => {
-      const auth = inject(Auth)
-      return auth.getCurrent()
+      const auth = inject(Auth);
+      return auth.getCurrent();
     }),
   ],
 };
