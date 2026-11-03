@@ -3,6 +3,7 @@ import { Login } from './auth/login/login';
 import { Dictionary } from './dictionary/dictionary';
 import { authGuard } from './auth/auth-guard';
 import { guestGuard } from './auth/guest-guard';
+import { Register } from './auth/register/register';
 
 export const routes: Routes = [
   {
@@ -10,6 +11,12 @@ export const routes: Routes = [
     redirectTo: 'dictionary',
     pathMatch: 'full',
   },
+  {
+    path: 'register',
+    component: Register,
+    canActivate: [guestGuard],
+  }
+  ,
   {
     path: 'login',
     component: Login,
