@@ -1,0 +1,35 @@
+@use "breakpoints" as *;
+
+.btn {
+  height: 56px;
+  line-height: 1.56;
+  border-radius: 30px;
+  font-size: 18px;
+  font-weight: 700;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color .2s ease-in-out;
+  border: 1px solid transparent;
+  @include tablet {
+    height: 60px;
+  }
+
+  &--primary {
+    color: var(--color-surface);
+    background-color: var(--color-accent);
+
+    &:hover {
+      background-color: var(--color-accent-hover);
+    }
+
+    &:focus-visible {
+      outline: 3px solid var(--color-accent-hover);
+      outline-offset: 2px;
+    }
+  }
+
+  &:disabled {
+    background-color: var(--color-disabled);
+    cursor: not-allowed;
+  }
+}

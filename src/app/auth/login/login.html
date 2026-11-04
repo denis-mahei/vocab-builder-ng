@@ -25,7 +25,7 @@
     @if (password.valid) {
       <p style="color: green">Success password</p>
     }
-    <button type="submit">login</button>
+    <button type="submit" class="btn btn--primary" [disabled]="loginForm.invalid">login</button>
   </form>
   <a routerLink="/register">SignUp</a>
 </div>

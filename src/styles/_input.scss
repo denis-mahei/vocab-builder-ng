@@ -9,7 +9,13 @@
   font-weight: 400;
   transition: border-color .1s ease-in-out;
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     border-color: var(--color-accent);
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--color-focus-ring);
+    outline-offset: 2px;
   }
 }
