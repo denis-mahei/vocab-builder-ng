@@ -56,17 +56,25 @@
       @if (passwordError) {
         <div>
           @if (password.hasError('required')) {
-            <p class="input__hint input__hint--error">Password is required!</p>
+            <p class="input__hint input__hint--error"><svg width="16" height="16">
+              <use href="/icons/sprite.svg#warn"></use>
+            </svg>Password is required!</p>
           }
           @if (password.hasError('pattern')) {
             <p class="input__hint input__hint--error">
+              <svg width="16" height="16">
+                <use href="/icons/sprite.svg#warn"></use>
+              </svg>
               Password must contain 6 English letters and 1 number
             </p>
           }
         </div>
       }
       @if (password.valid) {
-        <p class="input__hint input__hint--success">Success password</p>
+        <p class="input__hint input__hint--success">
+          <svg width="16" height="16">
+            <use href="/icons/sprite.svg#success"></use>
+          </svg>Success password</p>
       }
     </div>
   </div>

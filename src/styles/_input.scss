@@ -43,8 +43,8 @@
   }
 
   &__hint {
+    display: flex;
     font-size: 12px;
-    margin-left: 20px;
     margin-top: 4px;
 
     &--error {
