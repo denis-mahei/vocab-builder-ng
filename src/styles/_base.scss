@@ -31,7 +31,7 @@ body {
   display: flex;
   align-items: center;
   gap: 16px;
-  &--icon {
+  &__icon {
     width: 36px;
     height: 36px;
     background-color: var(--color-accent);
@@ -44,9 +44,10 @@ body {
       height: 40px;
     }
   }
-  &--text {
+  &__text {
     font-size: 18px;
     font-weight: 600;
     line-height: 1.33
   }
 }
+

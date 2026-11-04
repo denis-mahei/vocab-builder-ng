@@ -1,6 +1,11 @@
+<div class="heading">
+  <h1 class="title">Login</h1>
+  <p class="subtitle">
+    Please enter your login details to continue using our service:
+  </p>
+</div>
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form">
   <div class="form__fields">
-
     <div>
       <input
         type="email"
@@ -29,15 +34,17 @@
         formControlName="password"
         class="input"
         [class.input--error]="passwordError"
-        [class.input--success]='password.valid'
+        [class.input--success]="password.valid"
         placeholder="Password"
       />
       @if (passwordError) {
         <div>
           @if (password.hasError('required')) {
-            <p class="input__hint input__hint--error"><svg width="16" height="16">
-              <use href="/icons/sprite.svg#warn"></use>
-            </svg>Password is required!</p>
+            <p class="input__hint input__hint--error">
+              <svg width="16" height="16">
+                <use href="/icons/sprite.svg#warn"></use></svg
+              >Password is required!
+            </p>
           }
           @if (password.hasError('pattern')) {
             <p class="input__hint input__hint--error">
@@ -52,8 +59,9 @@
       @if (password.valid) {
         <p class="input__hint input__hint--success">
           <svg width="16" height="16">
-          <use href="/icons/sprite.svg#success"></use>
-        </svg>Success password</p>
+            <use href="/icons/sprite.svg#success"></use></svg
+          >Success password
+        </p>
       }
     </div>
   </div>
