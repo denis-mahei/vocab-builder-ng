@@ -1,0 +1,15 @@
+.link {
+  font-weight: 700;
+  text-decoration: underline;
+  color: var(--color-link);
+  transition: color .2s ease-in-out;
+  align-self: center;
+  &:hover {
+    color: var(--color-text);
+  }
+  &:focus-visible {
+    outline: 3px solid var(--color-focus-ring);
+    border-radius: 12px;
+    outline-offset: 3px;
+  }
+}

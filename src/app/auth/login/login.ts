@@ -35,9 +35,16 @@ export class Login {
   get email() {
     return this.loginForm.controls.email;
   }
+  get emailError() {
+    return this.email.invalid && (this.email.dirty || this.email.touched);
+  }
 
   get password() {
     return this.loginForm.controls.password;
+  }
+
+  get passwordError() {
+    return this.password.invalid && (this.password.dirty || this.password.touched);
   }
 
   onSubmit() {

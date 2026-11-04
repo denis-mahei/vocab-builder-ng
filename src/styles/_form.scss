@@ -1,0 +1,16 @@
+@use "breakpoints" as *;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.form__fields {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  @include tablet {
+    gap: 18px;
+  }
+}

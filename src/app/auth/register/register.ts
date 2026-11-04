@@ -34,12 +34,24 @@ export class Register {
     return this.registerForm.controls.name;
   }
 
+  get nameError() {
+    return this.name.invalid && (this.name.touched || this.name.dirty);
+  }
+
   get email() {
     return this.registerForm.controls.email;
   }
 
+  get emailError() {
+    return this.email.invalid && (this.email.dirty || this.email.touched);
+  }
+
   get password() {
     return this.registerForm.controls.password;
+  }
+
+  get passwordError() {
+    return this.password.invalid && (this.password.dirty || this.password.touched);
   }
 
   onSubmit() {
@@ -48,4 +60,5 @@ export class Register {
       error: (err) => console.log(err.message),
     });
   }
+
 }

@@ -1,0 +1,30 @@
+@use "breakpoints" as *;
+
+.auth-content {
+  display: flex;
+  flex-direction: column;
+  gap: 96px;
+  .content-img {
+    display: none;
+  }
+  .card {
+    background-color: var(--color-bg-accent);
+    border-radius: 30px;
+    padding: 32px  16px;
+    width: 100%;
+    @include tablet {
+    padding: 48px 64px;
+      width: 628px;
+    }
+  }
+  @include tablet {
+    align-items: center;
+  }
+  @include desktop {
+    flex-direction: row;
+    gap: 80px;
+    .content-img {
+      display: block;
+    }
+  }
+}

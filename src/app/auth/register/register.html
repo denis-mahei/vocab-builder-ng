@@ -1,45 +1,81 @@
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-  <input type="text" formControlName="name" minlength="3" class="input">
-  @if (name.invalid && (name.touched || name.dirty)) {
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="form">
+  <div class="form__fields">
     <div>
-      @if (name.hasError('required')) {
-        <p style="color: red">Name is required!</p>
-      }
-      @if (name.hasError('minlength')) {
-        <p style="color: red">Name must be at least 3 characters</p>
+      <input
+        type="text"
+        formControlName="name"
+        minlength="3"
+        class="input"
+        [class.input--error]="nameError"
+        [class.input--success]="name.valid"
+        placeholder="Name"
+      />
+      @if (nameError) {
+        <div>
+          @if (name.hasError('required')) {
+            <p class="input__hint input__hint--error">Name is required!</p>
+          }
+          @if (name.hasError('minlength')) {
+            <p class="input__hint input__hint--error">Name must be at least 3 characters</p>
+          }
+        </div>
       }
     </div>
-  }
-  <input type="email" formControlName="email" class="input">
+    <div>
+      <input
+        type="email"
+        formControlName="email"
+        class="input"
+        [class.input--error]="emailError"
+        [class.input--success]="email.valid"
+        placeholder="Email"
+      />
 
-  @if (email.invalid
-  && (email.dirty
-    || email.touched)) {
-    <div>
-      @if (email.hasError('required')) {
-        <p style="color: red">Email is required!</p>
-      }
-      @if (email.hasError('email')) {
-        <p style="color: red; font-size: 12px">Enter a valid email, e.g. name&#64;mail.com</p>
-      }
-    </div>
-  }
-  <input type="text" formControlName="password" class="input">
-  @if (password.invalid
-  && (password.dirty
-    || password.touched)) {
-    <div>
-      @if (password.hasError('required')) {
-        <p style="color: red">Password is required!</p>
-      }
-      @if (password.hasError('pattern')) {
-        <p style="color: red">Password must contain 6 English letters and 1 number</p>
+      @if (emailError) {
+        <div>
+          @if (email.hasError('required')) {
+            <p class="input__hint input__hint--error">Email is required!</p>
+          }
+          @if (email.hasError('email')) {
+            <p class="input__hint input__hint--error">
+              Enter a valid email, e.g. name&#64;mail.com
+            </p>
+          }
+        </div>
       }
     </div>
-  }
-  @if (password.valid) {
-    <p style="color: green">Success password</p>
-  }
-  <button type="submit" class="btn btn--primary" [disabled]="registerForm.invalid">SignUp</button>
+    <div>
+      <input
+        type="text"
+        formControlName="password"
+        class="input"
+        [class.input--error]="passwordError"
+        [class.input--success]="password.valid"
+        placeholder="Password"
+      />
+      @if (passwordError) {
+        <div>
+          @if (password.hasError('required')) {
+            <p class="input__hint input__hint--error">Password is required!</p>
+          }
+          @if (password.hasError('pattern')) {
+            <p class="input__hint input__hint--error">
+              Password must contain 6 English letters and 1 number
+            </p>
+          }
+        </div>
+      }
+      @if (password.valid) {
+        <p class="input__hint input__hint--success">Success password</p>
+      }
+    </div>
+  </div>
+  <button
+    type="submit"
+    class="btn btn--primary"
+    [disabled]="registerForm.invalid"
+  >
+    Register
+  </button>
 </form>
-<a routerLink="/login">SignIn</a>
+<a routerLink="/login" class="link">Login</a>
