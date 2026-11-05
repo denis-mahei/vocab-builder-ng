@@ -1,8 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 
-import { Router, RouterOutlet } from '@angular/router';
-import { Auth } from './auth/auth';
-import { finalize } from 'rxjs';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   imports: [RouterOutlet],
@@ -10,15 +8,4 @@ import { finalize } from 'rxjs';
   styleUrl: './app.scss',
   templateUrl: './app.html',
 })
-export class App {
-  protected readonly auth = inject(Auth);
-  private readonly router = inject(Router);
-
-  logout() {
-    this.auth.signOut()
-      .pipe(finalize(() => {
-        this.router.navigate(['/login']);
-      }))
-      .subscribe();
-  }
-}
+export class App {}

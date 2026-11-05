@@ -1,22 +1,44 @@
 @use "breakpoints" as *;
 
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  @include tablet {
+    gap: 140px;
+  }
+  @include desktop {
+    gap: 64px;
+  }
+}
+
+.header {
+  padding-top: 16px;
+  @include tablet {
+    padding-top: 24px;
+  }
+}
+
 .auth-content {
   display: flex;
   flex-direction: column;
   gap: 96px;
+
   .content-img {
     display: none;
   }
+
   .card {
     background-color: var(--color-bg-accent);
     border-radius: 30px;
-    padding: 32px  16px;
+    padding: 32px 16px;
     width: 100%;
     @include tablet {
-    padding: 48px 64px;
+      padding: 48px 64px;
       width: 628px;
     }
   }
+
   @include tablet {
     align-items: center;
   }
@@ -27,6 +49,11 @@
       display: block;
     }
   }
+}
+
+.img-container {
+  flex: 1;
+  min-width: 0;
 }
 
 .text {

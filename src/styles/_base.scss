@@ -13,7 +13,8 @@
     padding-inline: 32px;
   }
   @include desktop {
-    width: 1440px;
+    width: 100%;
+    max-width: 1440px;
     padding-inline: 100px;
   }
 }
@@ -27,27 +28,5 @@ body {
   line-height: 1.5;
 }
 
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  &__icon {
-    width: 36px;
-    height: 36px;
-    background-color: var(--color-accent);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    @include tablet {
-      width: 40px;
-      height: 40px;
-    }
-  }
-  &__text {
-    font-size: 18px;
-    font-weight: 600;
-    line-height: 1.33
-  }
-}
+
 
