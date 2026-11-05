@@ -8,7 +8,11 @@
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="form">
   <div class="form__fields">
     <div>
+      <label for="register-name" class="visually-hidden">Name</label>
       <input
+        id="register-name"
+        [aria-invalid]="nameError"
+        aria-describedby="register-name-error"
         type="text"
         formControlName="name"
         minlength="3"
@@ -16,9 +20,10 @@
         [class.input--error]="nameError"
         [class.input--success]="name.valid"
         placeholder="Name"
+        autocomplete="name"
       />
       @if (nameError) {
-        <div>
+        <div id="register-name-error">
           @if (name.hasError('required')) {
             <p class="input__hint input__hint--error">Name is required!</p>
           }
@@ -31,17 +36,22 @@
       }
     </div>
     <div>
+      <label for="register-email" class="visually-hidden">Email</label>
       <input
+        id="register-email"
+        aria-describedby="register-email-error"
+        [aria-invalid]="emailError"
         type="email"
         formControlName="email"
         class="input"
         [class.input--error]="emailError"
         [class.input--success]="email.valid"
         placeholder="Email"
+        autocomplete="email"
       />
 
       @if (emailError) {
-        <div>
+        <div id="register-email-error">
           @if (email.hasError('required')) {
             <p class="input__hint input__hint--error">Email is required!</p>
           }
@@ -55,19 +65,24 @@
     </div>
     <div>
       <div class="input__wrapper">
+        <label for="register-password" class="visually-hidden">Password</label>
         <input
+          id="register-password"
+          [aria-invalid]="passwordError"
+          aria-describedby="register-password-error"
           [type]="isPasswordVisible() ? 'text' : 'password'"
           formControlName="password"
           class="input"
           [class.input--error]="passwordError"
           [class.input--success]="password.valid"
           placeholder="Password"
+          autocomplete="new-password"
         />
         <button
           class="input__toggle"
           type="button"
           (click)="togglePasswordVisible()"
-          [aria-label]="isPasswordVisible() ? 'Show password' : 'Hide password'"
+          [aria-label]="isPasswordVisible() ? 'Hide password' : 'Show password'"
         >
           @if (isPasswordVisible()) {
             <svg width="20" height="20" aria-hidden="true">
@@ -82,7 +97,7 @@
       </div>
 
       @if (passwordError) {
-        <div>
+        <div id="register-password-error">
           @if (password.hasError('required')) {
             <p class="input__hint input__hint--error">
               <svg width="16" height="16">

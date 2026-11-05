@@ -7,16 +7,21 @@
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form">
   <div class="form__fields">
     <div>
+      <label for="login-email" class="visually-hidden"> Email </label>
       <input
         type="email"
         formControlName="email"
         class="input"
         [class.input--error]="emailError"
         [class.input--success]="email.valid"
+        [aria-invalid]="emailError"
+        id="login-email"
         placeholder="Email"
+        aria-describedby="login-email-error"
+        autocomplete="email"
       />
       @if (emailError) {
-        <div>
+        <div id="login-email-error">
           @if (email.hasError('required')) {
             <p class="input__hint input__hint--error">Email is required!</p>
           }
@@ -30,19 +35,24 @@
     </div>
     <div>
       <div class="input__wrapper">
+        <label for="login-password" class="visually-hidden">Password</label>
         <input
+          id="login-password"
           [type]="isPasswordVisible() ? 'text' : 'password'"
+          aria-describedby="login-password-error"
+          [aria-invalid]="passwordError"
           formControlName="password"
           class="input"
           [class.input--error]="passwordError"
           [class.input--success]="password.valid"
           placeholder="Password"
+          autocomplete="current-password"
         />
         <button
           class="input__toggle"
           type="button"
           (click)="togglePasswordVisible()"
-          [aria-label]="isPasswordVisible() ? 'Show password' : 'Hide password'"
+          [aria-label]="isPasswordVisible() ? 'Hide password' : 'Show password'"
         >
           @if (isPasswordVisible()) {
             <svg width="20" height="20" aria-hidden="true">
@@ -56,7 +66,7 @@
         </button>
       </div>
       @if (passwordError) {
-        <div>
+        <div id="login-password-error">
           @if (password.hasError('required')) {
             <p class="input__hint input__hint--error">
               <svg width="16" height="16">
@@ -78,8 +88,9 @@
       @if (password.valid) {
         <p class="input__hint input__hint--success">
           <svg width="16" height="16">
-            <use href="/icons/sprite.svg#success"></use></svg
-          >Success password
+            <use href="/icons/sprite.svg#success"></use>
+          </svg>
+          Success password
         </p>
       }
     </div>
