@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Auth } from '../auth';
 import { Router, RouterLink } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -12,6 +12,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 export class Register {
   protected readonly auth = inject(Auth);
   private readonly router = inject(Router);
+  readonly isPasswordVisible = signal(false);
 
   readonly registerForm = new FormGroup({
     name: new FormControl('', {
@@ -30,6 +31,11 @@ export class Register {
       ],
     }),
   });
+
+  togglePasswordVisible() {
+    this.isPasswordVisible.update(v => !v)
+  }
+
   get name() {
     return this.registerForm.controls.name;
   }

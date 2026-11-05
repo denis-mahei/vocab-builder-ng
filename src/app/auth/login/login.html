@@ -29,21 +29,40 @@
       }
     </div>
     <div>
-      <input
-        type="password"
-        formControlName="password"
-        class="input"
-        [class.input--error]="passwordError"
-        [class.input--success]="password.valid"
-        placeholder="Password"
-      />
+      <div class="input__wrapper">
+        <input
+          [type]="isPasswordVisible() ? 'text' : 'password'"
+          formControlName="password"
+          class="input"
+          [class.input--error]="passwordError"
+          [class.input--success]="password.valid"
+          placeholder="Password"
+        />
+        <button
+          class="input__toggle"
+          type="button"
+          (click)="togglePasswordVisible()"
+          [aria-label]="isPasswordVisible() ? 'Show password' : 'Hide password'"
+        >
+          @if (isPasswordVisible()) {
+            <svg width="20" height="20" aria-hidden="true">
+              <use href="/icons/sprite.svg#open-eye"></use>
+            </svg>
+          } @else {
+            <svg width="20" height="20" aria-hidden="true">
+              <use href="/icons/sprite.svg#close-eye"></use>
+            </svg>
+          }
+        </button>
+      </div>
       @if (passwordError) {
         <div>
           @if (password.hasError('required')) {
             <p class="input__hint input__hint--error">
               <svg width="16" height="16">
-                <use href="/icons/sprite.svg#warn"></use></svg
-              >Password is required!
+                <use href="/icons/sprite.svg#warn"></use>
+              </svg>
+              Password is required!
             </p>
           }
           @if (password.hasError('pattern')) {

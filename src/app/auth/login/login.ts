@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -17,6 +17,7 @@ import { Router, RouterLink } from '@angular/router';
 export class Login {
   protected readonly auth = inject(Auth);
   private readonly router = inject(Router);
+  readonly isPasswordVisible = signal(false)
 
   readonly loginForm = new FormGroup({
     email: new FormControl('', {
@@ -31,6 +32,10 @@ export class Login {
       ],
     }),
   });
+
+  togglePasswordVisible() {
+    this.isPasswordVisible.update(v => !v)
+  }
 
   get email() {
     return this.loginForm.controls.email;

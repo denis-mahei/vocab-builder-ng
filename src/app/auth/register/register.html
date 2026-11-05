@@ -5,101 +5,118 @@
     All fields are mandatory:
   </p>
 </div>
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="form">
-    <div class="form__fields">
-      <div>
-        <input
-          type="text"
-          formControlName="name"
-          minlength="3"
-          class="input"
-          [class.input--error]="nameError"
-          [class.input--success]="name.valid"
-          placeholder="Name"
-        />
-        @if (nameError) {
-          <div>
-            @if (name.hasError('required')) {
-              <p class="input__hint input__hint--error">Name is required!</p>
-            }
-            @if (name.hasError('minlength')) {
-              <p class="input__hint input__hint--error">
-                Name must be at least 3 characters
-              </p>
-            }
-          </div>
-        }
-      </div>
-      <div>
-        <input
-          type="email"
-          formControlName="email"
-          class="input"
-          [class.input--error]="emailError"
-          [class.input--success]="email.valid"
-          placeholder="Email"
-        />
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="form">
+  <div class="form__fields">
+    <div>
+      <input
+        type="text"
+        formControlName="name"
+        minlength="3"
+        class="input"
+        [class.input--error]="nameError"
+        [class.input--success]="name.valid"
+        placeholder="Name"
+      />
+      @if (nameError) {
+        <div>
+          @if (name.hasError('required')) {
+            <p class="input__hint input__hint--error">Name is required!</p>
+          }
+          @if (name.hasError('minlength')) {
+            <p class="input__hint input__hint--error">
+              Name must be at least 3 characters
+            </p>
+          }
+        </div>
+      }
+    </div>
+    <div>
+      <input
+        type="email"
+        formControlName="email"
+        class="input"
+        [class.input--error]="emailError"
+        [class.input--success]="email.valid"
+        placeholder="Email"
+      />
 
-        @if (emailError) {
-          <div>
-            @if (email.hasError('required')) {
-              <p class="input__hint input__hint--error">Email is required!</p>
-            }
-            @if (email.hasError('email')) {
-              <p class="input__hint input__hint--error">
-                Enter a valid email, e.g. name&#64;mail.com
-              </p>
-            }
-          </div>
-        }
-      </div>
-      <div>
+      @if (emailError) {
+        <div>
+          @if (email.hasError('required')) {
+            <p class="input__hint input__hint--error">Email is required!</p>
+          }
+          @if (email.hasError('email')) {
+            <p class="input__hint input__hint--error">
+              Enter a valid email, e.g. name&#64;mail.com
+            </p>
+          }
+        </div>
+      }
+    </div>
+    <div>
+      <div class="input__wrapper">
         <input
-          type="text"
+          [type]="isPasswordVisible() ? 'text' : 'password'"
           formControlName="password"
           class="input"
           [class.input--error]="passwordError"
           [class.input--success]="password.valid"
           placeholder="Password"
         />
-        @if (passwordError) {
-          <div>
-            @if (password.hasError('required')) {
-              <p class="input__hint input__hint--error">
-                <svg width="16" height="16">
-                  <use href="/icons/sprite.svg#warn"></use>
-                </svg
-                >
-                Password is required!
-              </p>
-            }
-            @if (password.hasError('pattern')) {
-              <p class="input__hint input__hint--error">
-                <svg width="16" height="16">
-                  <use href="/icons/sprite.svg#warn"></use>
-                </svg>
-                Password must contain 6 English letters and 1 number
-              </p>
-            }
-          </div>
-        }
-        @if (password.valid) {
-          <p class="input__hint input__hint--success">
-            <svg width="16" height="16">
-              <use href="/icons/sprite.svg#success"></use>
-            </svg
-            >
-            Success password
-          </p>
-        }
+        <button
+          class="input__toggle"
+          type="button"
+          (click)="togglePasswordVisible()"
+          [aria-label]="isPasswordVisible() ? 'Show password' : 'Hide password'"
+        >
+          @if (isPasswordVisible()) {
+            <svg width="20" height="20" aria-hidden="true">
+              <use href="/icons/sprite.svg#open-eye"></use>
+            </svg>
+          } @else {
+            <svg width="20" height="20" aria-hidden="true">
+              <use href="/icons/sprite.svg#close-eye"></use>
+            </svg>
+          }
+        </button>
       </div>
+
+      @if (passwordError) {
+        <div>
+          @if (password.hasError('required')) {
+            <p class="input__hint input__hint--error">
+              <svg width="16" height="16">
+                <use href="/icons/sprite.svg#warn"></use>
+              </svg>
+              Password is required!
+            </p>
+          }
+          @if (password.hasError('pattern')) {
+            <p class="input__hint input__hint--error">
+              <svg width="16" height="16">
+                <use href="/icons/sprite.svg#warn"></use>
+              </svg>
+              Password must contain 6 English letters and 1 number
+            </p>
+          }
+        </div>
+      }
+      @if (password.valid) {
+        <p class="input__hint input__hint--success">
+          <svg width="16" height="16">
+            <use href="/icons/sprite.svg#success"></use>
+          </svg>
+          Success password
+        </p>
+      }
     </div>
-    <button
-      type="submit"
-      class="btn btn--primary"
-      [disabled]="registerForm.invalid"
-    >
-      Register
-    </button>
-  </form>
-  <a routerLink="/login" class="link">Login</a>
+  </div>
+  <button
+    type="submit"
+    class="btn btn--primary"
+    [disabled]="registerForm.invalid"
+  >
+    Register
+  </button>
+</form>
+<a routerLink="/login" class="link">Login</a>

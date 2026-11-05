@@ -56,3 +56,13 @@
     }
   }
 }
+
+.input__wrapper {
+  position: relative;
+}
+.input__toggle {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+}
