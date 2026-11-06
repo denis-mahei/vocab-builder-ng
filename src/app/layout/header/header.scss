@@ -1,0 +1,32 @@
+@use "breakpoints" as *;
+
+.header {
+  background-color: var(--color-white);
+  padding-top: 16px;
+  padding-bottom: 16px;
+  @include tablet {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
+.header__inner {
+  @include desktop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+.nav__list {
+  display: flex;
+  gap: 8px;
+}
+.nav__link {
+  display: block;
+  font-size: 14px;
+  padding: 12px 20px;
+  &--active {
+    border-radius: 15px;
+    background-color: var(--color-accent);
+    color: var(--color-white);
+  }
+}
