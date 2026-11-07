@@ -1,0 +1,14 @@
+<div class="user-bar">
+  <p class="user-bar__name">{{ auth.user()?.name }}</p>
+  <div class="user-bar__avatar">
+    <svg width="24" height="24" aria-hidden="true">
+      <use href="/icons/sprite.svg#user"></use>
+    </svg>
+  </div>
+  <button type="button" class="user-bar__logout" (click)="logout()">
+    Log out
+    <svg width="20" height="20" aria-hidden="true">
+      <use href="/icons/sprite.svg#arrow"></use>
+    </svg>
+  </button>
+</div>

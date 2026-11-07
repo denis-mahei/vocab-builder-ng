@@ -1,0 +1,18 @@
+.nav {
+  &__list {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__link {
+    display: block;
+    font-size: 14px;
+    padding: 12px 20px;
+
+    &--active {
+      border-radius: 15px;
+      background-color: var(--color-accent);
+      color: var(--color-white);
+    }
+  }
+}
