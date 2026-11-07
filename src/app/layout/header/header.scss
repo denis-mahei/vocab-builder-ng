@@ -5,17 +5,38 @@
   background-color: var(--color-white);
   padding-top: 16px;
   padding-bottom: 16px;
+
+  &__user {
+    display: flex;
+    align-items: center;
+  }
+  &__nav {
+    display: none;
+    @include desktop {
+      display: flex;
+    }
+  }
+  &__logout {
+    display: none;
+    @include desktop {
+      margin-left: 16px;
+      display: flex;
+    }
+  }
+
   @include tablet {
     padding-top: 20px;
     padding-bottom: 20px;
   }
 }
-
 .header__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.burger-btn {
+  margin-left: 8px;
   @include desktop {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: none;
   }
 }
-
