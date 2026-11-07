@@ -1,4 +1,5 @@
-@use "breakpoints" as *;
+@use 'breakpoints' as *;
+@use 'mixins' as *;
 
 .header {
   background-color: var(--color-white);
@@ -9,6 +10,7 @@
     padding-bottom: 20px;
   }
 }
+
 .header__inner {
   @include desktop {
     display: flex;
@@ -16,17 +18,39 @@
     align-items: center;
   }
 }
-.nav__list {
-  display: flex;
-  gap: 8px;
+
+.nav {
+  &__list {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__link {
+    display: block;
+    font-size: 14px;
+    padding: 12px 20px;
+
+    &--active {
+      border-radius: 15px;
+      background-color: var(--color-accent);
+      color: var(--color-white);
+    }
+  }
 }
-.nav__link {
-  display: block;
-  font-size: 14px;
-  padding: 12px 20px;
-  &--active {
-    border-radius: 15px;
-    background-color: var(--color-accent);
-    color: var(--color-white);
+
+.user-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  &__name {
+    font-size: 20px;
+  }
+  &__avatar {
+    @include circle(48px);
+  }
+  &__logout {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
   }
 }
