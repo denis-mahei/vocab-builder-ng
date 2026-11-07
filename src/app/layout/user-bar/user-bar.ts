@@ -1,7 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { Auth } from '../../auth/auth';
-import { Router } from '@angular/router';
-import { finalize } from 'rxjs';
 
 @Component({
   imports: [],
@@ -11,16 +9,4 @@ import { finalize } from 'rxjs';
 })
 export class UserBar {
   protected readonly auth = inject(Auth);
-  private readonly router = inject(Router);
-
-  logout() {
-    this.auth
-      .signOut()
-      .pipe(
-        finalize(() => {
-          this.router.navigate(['/login']);
-        }),
-      )
-      .subscribe();
-  }
 }
