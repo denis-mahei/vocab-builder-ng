@@ -1,20 +1,14 @@
 @use 'breakpoints' as *;
+@use "mixins" as *;
 
 .logo {
   display: flex;
   align-items: center;
   gap: 16px;
   &__icon {
-    width: 36px;
-    height: 36px;
-    background-color: var(--color-accent);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
+   @include circle(36px);
     @include tablet {
-      width: 40px;
-      height: 40px;
+      @include circle(40px)
     }
   }
   &__text {
