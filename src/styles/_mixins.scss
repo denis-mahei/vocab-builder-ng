@@ -13,7 +13,6 @@
 @mixin circle($size) {
   width: $size;
   height: $size;
-  background-color: var(--color-accent);
   display: flex;
   justify-content: center;
   align-items: center;

@@ -7,12 +7,15 @@
   gap: 10px;
   &__name {
     font-size: 16px;
+    color: inherit;
     @include desktop {
       font-size: 20px;
     }
   }
 
   &__avatar {
+    background-color: var(--avatar-bg, var(--color-accent));
+    color: var(--avatar-icon, var(--color-white));
     @include circle(36px);
     @include desktop {
       @include circle(48px);

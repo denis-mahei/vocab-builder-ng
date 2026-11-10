@@ -6,6 +6,7 @@
   align-items: center;
   gap: 16px;
   &__icon {
+    background-color: var(--color-accent);
    @include circle(36px);
     @include tablet {
       @include circle(40px)
