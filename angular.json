@@ -32,7 +32,10 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.scss"]
+            "styles": [
+              "node_modules/@angular/cdk/overlay-prebuilt.css",
+              "src/styles.scss"
+            ]
           },
           "configurations": {
             "production": {
