@@ -28,7 +28,9 @@ button {
 button, input, select, textarea {
   font: inherit;
 }
-
+img {
+  height: auto;
+}
 img, svg {
   display: block;
   max-width: 100%;
