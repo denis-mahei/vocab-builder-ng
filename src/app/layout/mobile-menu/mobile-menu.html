@@ -1,6 +1,6 @@
-<div class="menu">
+<div class="menu" [class.menu--closing]="isClosing()" (animationend)="onAnimationEnd()">
   <div class="menu__top-bar">
-    <app-user-bar />
+    <app-user-bar/>
     <button
       type="button"
       class="menu__close"
@@ -13,12 +13,12 @@
     </button>
   </div>
   <div class="menu__nav">
-    <app-user-nav />
-    <app-logout-button />
+    <app-user-nav/>
+    <app-logout-button/>
   </div>
   <img src="/images/auth/illustration.webp"
        srcset="/images/auth/illustration.webp 1x,
-           /images/auth/illustration@2x.webp 2x"
+               /images/auth/illustration@2x.webp 2x"
        loading="lazy"
        width="363"
        height="318"

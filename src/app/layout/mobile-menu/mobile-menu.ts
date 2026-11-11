@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { UserBar } from '../user-bar/user-bar';
 import { DialogRef } from '@angular/cdk/dialog';
 import { UserNav } from '../user-nav/user-nav';
@@ -15,6 +15,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class MobileMenu {
   private readonly dialogRef = inject<DialogRef>(DialogRef);
   private readonly router = inject(Router);
+  isClosing = signal(false);
 
   constructor() {
     this.router.events.pipe(takeUntilDestroyed()).subscribe((event: Event) => {
@@ -22,8 +23,22 @@ export class MobileMenu {
         this.closeDialog();
       }
     });
+    this.dialogRef.backdropClick.subscribe(() => {
+      this.closeDialog();
+    });
+    this.dialogRef.keydownEvents.subscribe((event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        this.closeDialog()
+      }
+    });
   }
   closeDialog() {
-    this.dialogRef.close();
+    if (this.isClosing()) return;
+    this.isClosing.set(true);
+  }
+  onAnimationEnd() {
+    if (this.isClosing()) {
+      this.dialogRef.close();
+    }
   }
 }

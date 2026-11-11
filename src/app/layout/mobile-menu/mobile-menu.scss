@@ -8,23 +8,54 @@
   --avatar-bg: var(--color-white);
   --avatar-icon: var(--color-accent);
   overflow: hidden;
+  animation: .2s ease-out slide-in;
   &__top-bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
+
   &__close {
     color: var(--color-surface);
   }
+
   &__nav {
     margin-top: 166px;
     display: flex;
     flex-direction: column;
     gap: 28px;
   }
+
   &__img {
     margin-top: auto;
     align-self: center;
     max-width: none;
+  }
+
+  &--closing {
+    animation: .2s ease-in slide-out;
+    animation-delay: .15s;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    animation-duration: 1ms
+  }
+}
+
+
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes slide-out {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(100%);
   }
 }
