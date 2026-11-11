@@ -12,11 +12,12 @@
     <div class="header__user">
       <app-user-bar />
       <app-logout-button class="header__logout" />
-      <button class="burger-btn">
-        <svg width="32" height="32">
+      <button type="button" class="burger-btn" aria-label="Open menu" (click)="openDialog()" aria-haspopup="dialog">
+        <svg width="32" height="32" aria-hidden="true">
             <use href="/icons/sprite.svg#nav"></use>
         </svg>
       </button>
     </div>
   </div>
 </header>
+

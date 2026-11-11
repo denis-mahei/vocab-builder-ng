@@ -1,18 +1,32 @@
+@use "breakpoints" as *;
+
 .nav {
   &__list {
     display: flex;
-    gap: 8px;
+    flex-direction: column;
+    gap: 28px;
+    @include desktop {
+      flex-direction: row;
+      gap: 8px;
+    }
   }
 
   &__link {
     display: block;
     font-size: 14px;
-    padding: 12px 20px;
+    @include desktop {
+      padding: 12px 20px;
+    }
 
     &--active {
+      padding: 12px 20px;
       border-radius: 15px;
-      background-color: var(--color-accent);
-      color: var(--color-white);
+      background-color: var(--color-white);
+      color: var(--color-text);
+      @include desktop {
+        background-color: var(--color-accent);
+        color: var(--color-white);
+      }
     }
   }
 }

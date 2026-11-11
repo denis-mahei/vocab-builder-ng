@@ -1,0 +1,27 @@
+<div class="menu">
+  <div class="menu__top-bar">
+    <app-user-bar />
+    <button
+      type="button"
+      class="menu__close"
+      aria-label="Close menu"
+      (click)="closeDialog()"
+    >
+      <svg width="32" height="32" aria-hidden="true">
+        <use href="/icons/sprite.svg#close"></use>
+      </svg>
+    </button>
+  </div>
+  <div class="menu__nav">
+    <app-user-nav />
+    <app-logout-button />
+  </div>
+  <img src="/images/auth/illustration.webp"
+       srcset="/images/auth/illustration.webp 1x,
+           /images/auth/illustration@2x.webp 2x"
+       loading="lazy"
+       width="363"
+       height="318"
+       alt=""
+       class="menu__img"/>
+</div>

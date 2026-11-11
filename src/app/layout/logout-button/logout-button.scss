@@ -1,5 +1,11 @@
+@use "breakpoints" as *;
+
 .logout {
   display: flex;
   align-items: center;
   cursor: pointer;
+  color: var(--color-surface);
+  @include desktop {
+    color: var(--color-text);
+  }
 }

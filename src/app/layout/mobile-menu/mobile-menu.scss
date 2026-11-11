@@ -1,0 +1,30 @@
+.menu {
+  background-color: var(--color-accent);
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  height: 100dvh;
+  color: var(--color-white);
+  --avatar-bg: var(--color-white);
+  --avatar-icon: var(--color-accent);
+  overflow: hidden;
+  &__top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__close {
+    color: var(--color-surface);
+  }
+  &__nav {
+    margin-top: 166px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  &__img {
+    margin-top: auto;
+    align-self: center;
+    max-width: none;
+  }
+}
