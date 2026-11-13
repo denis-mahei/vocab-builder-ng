@@ -1,6 +1,13 @@
-@for (word of words(); track word._id) {
-  <p>{{ word.category }}</p>
-  <p>En: {{ word.en }} – <span>Ua: {{ word.ua }}</span></p>
-} @empty {
-  <p>No words yet!</p>
+@if (error()) {
+  <h1 style="color: #e84324;text-align: center">{{ error() }}</h1>
+} @else if (isLoading()) {
+  <h1 style="color: mediumpurple;text-align: center">Loading...</h1>
+} @else {
+  @for (word of words(); track word._id) {
+    <p>{{ word.category }}</p>
+    <p>En: {{ word.en }} – <span>Ua: {{ word.ua }}</span></p>
+  } @empty {
+    <p>No words yet!</p>
+  }
 }
+
