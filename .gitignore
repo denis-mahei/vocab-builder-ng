@@ -20,6 +20,7 @@ yarn-error.log
 .settings/
 *.sublime-workspace
 req.http
+http-client.env.json
 
 # Visual Studio Code
 .vscode/*
