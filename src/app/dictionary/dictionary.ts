@@ -3,9 +3,10 @@ import { Words } from './words';
 import { Word } from '../models';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { finalize } from 'rxjs';
+import { WordsTable } from '../shared/words-table/words-table';
 
 @Component({
-  imports: [],
+  imports: [WordsTable],
   selector: 'app-dictionary',
   styleUrl: './dictionary.scss',
   templateUrl: './dictionary.html',
@@ -13,6 +14,7 @@ import { finalize } from 'rxjs';
 export class Dictionary {
   private readonly wordsService = inject(Words);
   readonly words = signal<Word[]>([]);
+
   isLoading = signal(false);
   error = signal<string | null>(null);
 
@@ -37,6 +39,5 @@ export class Dictionary {
           console.error(err);
         },
       });
-
   }
 }

@@ -3,11 +3,8 @@
 } @else if (isLoading()) {
   <h1 style="color: mediumpurple;text-align: center">Loading...</h1>
 } @else {
-  @for (word of words(); track word._id) {
-    <p>{{ word.category }}</p>
-    <p>En: {{ word.en }} – <span>Ua: {{ word.ua }}</span></p>
-  } @empty {
-    <p>No words yet!</p>
-  }
+  <div class="container">
+    <app-words-table [words]="words()"/>
+  </div>
 }
 

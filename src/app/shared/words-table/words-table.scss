@@ -1,0 +1,31 @@
+@use "breakpoints" as *;
+
+.wrapper {
+  @include tablet {
+    background-color: var(--color-white);
+    padding: 18px;
+    border-radius: 15px;
+  }
+}
+.table {
+  &__th {
+    width: 280px;
+    font-weight: 500;
+    font-size: 20px;
+    background-color: var(--color-bg-accent);
+    padding: 22px;
+    text-align: left;
+    &:first-child {
+      border-top-left-radius: 8px;
+    }
+    &:last-child {
+      border-top-right-radius: 8px;
+    }
+  }
+  &__flag {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+

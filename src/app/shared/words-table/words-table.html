@@ -1,0 +1,47 @@
+<div class="wrapper">
+  <table class="table">
+    <caption class="visually-hidden">
+      Words table
+    </caption>
+    <thead>
+    <tr>
+      <th scope="col" class="table__th">
+        <span class="table__flag"
+        >Words
+          <svg width="32" height="32" aria-hidden="true">
+            <use href="/icons/sprite.svg#flag-uk"></use>
+          </svg>
+        </span>
+      </th>
+      <th scope="col" class="table__th">
+        <span class="table__flag">
+          Translation
+          <svg width="32" height="32" aria-hidden="true">
+            <use href="/icons/sprite.svg#flag-ua"></use>
+          </svg>
+        </span>
+      </th>
+      <th class="table__th" scope="col">Category</th>
+      <th class="table__th" scope="col">Progress</th>
+      <th class="table__th " scope="col"><span class="visually-hidden">actions</span></th>
+    </tr>
+    </thead>
+    <tbody>
+      @for (word of words(); track word._id) {
+        <tr>
+          <td>{{ word.en }}</td>
+          <td>{{ word.ua }}</td>
+          <td>{{ word.category }}</td>
+          <td>{{ word.progress }}%</td>
+          <td>
+            <button type="button" aria-label="Open popup">...</button>
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="5">No words yet!</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
