@@ -18,7 +18,6 @@ export class Header {
 
   openDialog() {
     this.dialog.open(MobileMenu, {
-      width: '185px',
       height: '100%',
       disableClose: true,
       positionStrategy: this.overlay.position().global().right('0').top('0'),
