@@ -29,12 +29,12 @@
     <tbody>
       @for (word of words(); track word._id) {
         <tr>
-          <td>{{ word.en }}</td>
-          <td>{{ word.ua }}</td>
+          <td lang="en">{{ word.en }}</td>
+          <td lang="uk">{{ word.ua }}</td>
           <td class="table__th--category">{{ word.category }}</td>
           <td>{{ word.progress }}%</td>
-          <td>
-            <button type="button" aria-label="Actions for {{word.en}}">...</button>
+          <td class="table__actions">
+            <button type="button" class="table__btn" aria-label="Actions for {{word.en}}">...</button>
           </td>
         </tr>
       } @empty {

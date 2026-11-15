@@ -13,6 +13,7 @@
   table-layout: fixed;
   border-collapse: separate;
   border-spacing: 0;
+
   &__th {
     font-weight: 500;
     font-size: 16px;
@@ -77,6 +78,7 @@
       font-size: 20px;
     }
   }
+
   &__flag-icon {
     display: none;
     @include tablet {
@@ -90,6 +92,16 @@
     }
   }
 
+  &__actions {
+    text-align: center;
+  }
+
+  &__btn {
+    cursor: pointer;
+    padding: 2px 4px;
+    color: var(--color-text-muted);
+  }
+
   &__flag {
     @include tablet {
       display: flex;
@@ -98,19 +110,32 @@
     }
   }
 }
-th,td {
+
+th, td {
   border-bottom: 1px solid var(--color-border);
   border-right: 1px solid var(--color-border);
 }
+
 th:last-child,
 td:last-child {
   border-right: none;
 }
-tr:last-child td{
+
+tr:last-child td {
   border-bottom: none;
 }
+
 td {
   padding: 16px 14px;
   hyphens: auto;
-  overflow-wrap: anywhere
+  overflow-wrap: anywhere;
+  vertical-align: top;
+  font-size: 14px;
+  @include tablet {
+    font-size: 18px;
+    padding: 22px;
+  }
+  @include desktop {
+    font-size: 20px;
+  }
 }
