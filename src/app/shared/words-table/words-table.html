@@ -5,25 +5,25 @@
     </caption>
     <thead>
     <tr>
-      <th scope="col" class="table__th">
+      <th scope="col" class="table__th table__th--words">
         <span class="table__flag"
         >Words
-          <svg width="32" height="32" aria-hidden="true">
+          <svg class="table__flag-icon" aria-hidden="true">
             <use href="/icons/sprite.svg#flag-uk"></use>
           </svg>
         </span>
       </th>
-      <th scope="col" class="table__th">
+      <th scope="col" class="table__th table__th--translation">
         <span class="table__flag">
           Translation
-          <svg width="32" height="32" aria-hidden="true">
+          <svg class="table__flag-icon" aria-hidden="true">
             <use href="/icons/sprite.svg#flag-ua"></use>
           </svg>
         </span>
       </th>
-      <th class="table__th" scope="col">Category</th>
-      <th class="table__th" scope="col">Progress</th>
-      <th class="table__th " scope="col"><span class="visually-hidden">actions</span></th>
+      <th class="table__th table__th--category" scope="col">Category</th>
+      <th class="table__th table__th--progress" scope="col">Progress</th>
+      <th class="table__th" scope="col"><span class="visually-hidden">actions</span></th>
     </tr>
     </thead>
     <tbody>
@@ -31,10 +31,10 @@
         <tr>
           <td>{{ word.en }}</td>
           <td>{{ word.ua }}</td>
-          <td>{{ word.category }}</td>
+          <td class="table__th--category">{{ word.category }}</td>
           <td>{{ word.progress }}%</td>
           <td>
-            <button type="button" aria-label="Open popup">...</button>
+            <button type="button" aria-label="Actions for {{word.en}}">...</button>
           </td>
         </tr>
       } @empty {
