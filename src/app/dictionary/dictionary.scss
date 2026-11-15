@@ -1,0 +1,11 @@
+.dictionary {
+  text-align: center;
+  padding: 10px;
+  font-size: 24px;
+  &--error {
+    color: var(--color-error);
+  }
+  &--loading {
+    color: var(--color-accent);
+  }
+}

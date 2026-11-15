@@ -1,7 +1,7 @@
 @if (error()) {
-  <h1 style="color: #e84324;text-align: center">{{ error() }}</h1>
+  <p class="dictionary dictionary--error" role="alert">{{ error() }}</p>
 } @else if (isLoading()) {
-  <h1 style="color: mediumpurple;text-align: center">Loading...</h1>
+  <p class="dictionary dictionary--loading" role="status">Loading...</p>
 } @else {
   <div class="container">
     <app-words-table [words]="words()"/>
