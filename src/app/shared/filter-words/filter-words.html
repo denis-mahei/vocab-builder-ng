@@ -3,9 +3,19 @@
   <input type="search" id="search" class="input" formControlName="term">
   <label for="category" class="visually-hidden">Categories</label>
   <select id="category" formControlName="category">
-    <option value="">Category</option>
+    <option value="">Categories</option>
     @for (c of categories(); track c) {
       <option [value]="c">{{c}}</option>
     }
   </select>
+  @if (isVerb) {
+    <input type="radio"
+           id="regular"
+           formControlName="isIrregular" [value]="false">
+    <label for="regular">Regular</label>
+    <input type="radio"
+           id="irregular"
+           formControlName="isIrregular" [value]="true">
+    <label for="irregular">Irregular</label>
+  }
 </form>

@@ -8,6 +8,10 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
   templateUrl: './filter-words.html',
 })
 export class FilterWords {
-  readonly form = input.required<FormGroup>()
-  readonly categories = input.required<string[]>()
+  readonly form = input.required<FormGroup>();
+  readonly categories = input.required<string[]>();
+
+  get isVerb(): boolean {
+    return this.form().get('category')?.value === 'verb';
+  }
 }

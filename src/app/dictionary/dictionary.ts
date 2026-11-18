@@ -30,7 +30,8 @@ export class Dictionary {
 
   searchWords = new FormGroup({
     term: new FormControl('', { nonNullable: true }),
-    category: new FormControl("",{nonNullable: true}),
+    category: new FormControl('', { nonNullable: true }),
+    isIrregular: new FormControl(false, { nonNullable: true }),
   });
 
   constructor() {
@@ -38,22 +39,27 @@ export class Dictionary {
     this.error.set(null);
 
     this.wordsService.fetchCategories().subscribe({
-      next: category => this.categories.set(category),
-      error: () => this.error.set("Oops, something went wrong"),
-    })
+      next: (category) => this.categories.set(category),
+      error: () => this.error.set('Oops, something went wrong'),
+    });
 
     this.searchWords.valueChanges
       .pipe(
-        debounceTime(300),
+        debounceTime(200),
         distinctUntilChanged((prev, curr) => {
-          return prev.term?.trim() === curr.term?.trim() && prev.category === curr.category;
+          return (
+            prev.term?.trim() === curr.term?.trim() &&
+            prev.category === curr.category &&
+              prev.isIrregular === curr.isIrregular
+          );
         }),
-        switchMap(({ term, category }) => {
+        switchMap(({ term, category, isIrregular }) => {
           const keyword = term?.trim();
           const params: WordsParams = {
             page: 1,
             limit: 7,
-            ...(category ? {category} : {}),
+            ...(category === 'verb' ? {isIrregular} : {}),
+            ...(category ? { category } : {}),
             ...(keyword ? { keyword } : {}),
           };
           return this.wordsService
