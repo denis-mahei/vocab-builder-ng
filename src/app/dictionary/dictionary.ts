@@ -11,8 +11,8 @@ import {
   switchMap,
 } from 'rxjs';
 import { WordsTable } from '../shared/words-table/words-table';
-import { FormControl, FormGroup } from '@angular/forms';
 import { FilterWords } from '../shared/filter-words/filter-words';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   imports: [WordsTable, FilterWords],
@@ -28,7 +28,7 @@ export class Dictionary {
   error = signal<string | null>(null);
 
   searchWords = new FormGroup({
-    keyword: new FormControl('', { nonNullable: true }),
+    term: new FormControl('', { nonNullable: true }),
   });
 
   constructor() {
@@ -37,25 +37,25 @@ export class Dictionary {
 
     this.searchWords.valueChanges
       .pipe(
-        debounceTime(350),
-        distinctUntilChanged((previous, current) => {
-          return previous.keyword?.trim() === current.keyword?.trim();
+        debounceTime(450),
+        distinctUntilChanged((prev, curr) => {
+          return prev.term?.trim() === curr.term?.trim();
         }),
-        switchMap(({ keyword }) => {
-          const term = keyword?.trim();
+        switchMap(({ term }) => {
+          const keyword = term?.trim();
           const params: WordsParams = {
             page: 1,
             limit: 7,
-            ...(term ? { keyword: term } : {}),
+            ...(keyword ? { keyword } : {}),
           };
-
-          return this.wordsService.fetchOwnWords(params);
+          return this.wordsService
+            .fetchOwnWords(params)
+            .pipe(catchError(() => EMPTY));
         }),
         takeUntilDestroyed(),
       )
-      .pipe(catchError(() => EMPTY))
-      .subscribe((data) => {
-        this.words.set(data.results);
+      .subscribe(({ results }) => {
+        this.words.set(results);
       });
 
     this.wordsService

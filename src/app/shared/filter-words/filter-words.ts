@@ -8,5 +8,5 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
   templateUrl: './filter-words.html',
 })
 export class FilterWords {
-  readonly form = input.required<FormGroup>();
+  readonly form = input.required<FormGroup>()
 }
