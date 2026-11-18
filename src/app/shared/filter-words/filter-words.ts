@@ -9,4 +9,5 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 })
 export class FilterWords {
   readonly form = input.required<FormGroup>()
+  readonly categories = input.required<string[]>()
 }

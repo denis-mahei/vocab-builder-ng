@@ -4,7 +4,7 @@
   <p class="dictionary dictionary--loading" role="status">Loading...</p>
 } @else {
   <div class="container">
-    <app-filter-words [form]="searchWords"/>
+    <app-filter-words [form]="searchWords" [categories]="categories()"/>
     <app-words-table [words]="words()"/>
   </div>
 }

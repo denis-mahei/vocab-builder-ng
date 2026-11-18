@@ -1,4 +1,11 @@
 <form [formGroup]="form()">
   <label for="search" class="visually-hidden">Search word</label>
   <input type="search" id="search" class="input" formControlName="term">
+  <label for="category" class="visually-hidden">Categories</label>
+  <select id="category" formControlName="category">
+    <option value="">Category</option>
+    @for (c of categories(); track c) {
+      <option [value]="c">{{c}}</option>
+    }
+  </select>
 </form>

@@ -13,4 +13,9 @@ export class Words {
       params,
     });
   }
+
+  fetchCategories(): Observable<string[]> {
+    return this.http.get<string[]>(environment.apiUrl + '/words/categories');
+  }
+
 }
