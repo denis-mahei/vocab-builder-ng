@@ -9,7 +9,7 @@
       placeholder="Find the word"
     />
     <svg width="20" height="20" aria-hidden="true" class="filters__icon">
-        <use href="/icons/sprite.svg#search"></use>
+      <use href="/icons/sprite.svg#search"></use>
     </svg>
   </div>
   <label for="category" class="visually-hidden">Categories</label>
@@ -25,21 +25,26 @@
     </svg>
   </div>
   @if (isVerb) {
-    <div>
-      <input
-        type="radio"
-        id="regular"
-        formControlName="isIrregular"
-        [value]="false"
-      />
-      <label for="regular">Regular</label>
-      <input
-        type="radio"
-        id="irregular"
-        formControlName="isIrregular"
-        [value]="true"
-      />
-      <label for="irregular">Irregular</label>
-    </div>
+    <fieldset class="filters__radio-group">
+      <legend class="visually-hidden">Verb type</legend>
+      <label class="filters__radio-label">
+        <input
+          class="filters__radio"
+          type="radio"
+          formControlName="isIrregular"
+          [value]="false"
+        />
+        Regular
+      </label>
+      <label class="filters__radio-label">
+        <input
+          class="filters__radio"
+          type="radio"
+          formControlName="isIrregular"
+          [value]="true"
+        />
+        Irregular
+      </label>
+    </fieldset>
   }
 </form>
