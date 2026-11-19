@@ -51,3 +51,7 @@ export type WordsParams = {
   isIrregular?: boolean;
   limit: number;
 }
+
+export interface WordStatisticsResponse  {
+  totalCount: number;
+}

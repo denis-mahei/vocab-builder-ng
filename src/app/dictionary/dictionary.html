@@ -5,6 +5,7 @@
 } @else {
   <div class="container">
     <app-filter-words [form]="searchWords" [categories]="categories()"/>
+    <p>To study: {{toStudy()}}</p>
     <app-words-table [words]="words()"/>
   </div>
 }

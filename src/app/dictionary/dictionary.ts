@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { Words } from './words';
-import { Word, WordsParams } from '../models';
+import { Word, WordsParams, WordStatisticsResponse } from '../models';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   catchError,
@@ -24,9 +24,16 @@ export class Dictionary {
   private readonly wordsService = inject(Words);
   readonly words = signal<Word[]>([]);
   readonly categories = signal<string[]>([]);
+  readonly toStudy = signal<number>(0)
 
   isLoading = signal(false);
   error = signal<string | null>(null);
+
+  loadStatistics() {
+    this.wordsService.fetchStatistics().subscribe({
+      next: (total) => this.toStudy.set(total.totalCount),
+    });
+  }
 
   searchWords = new FormGroup({
     term: new FormControl('', { nonNullable: true }),
@@ -37,6 +44,8 @@ export class Dictionary {
   constructor() {
     this.isLoading.set(true);
     this.error.set(null);
+
+    this.loadStatistics()
 
     this.wordsService.fetchCategories().subscribe({
       next: (category) => this.categories.set(category),
