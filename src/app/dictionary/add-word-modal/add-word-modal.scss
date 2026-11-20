@@ -1,0 +1,25 @@
+:host {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-accent);
+  border-radius: 15px;
+}
+
+.add-word-modal {
+  &__close {
+    align-self: flex-end;
+    color: var(--color-white);
+    margin-bottom: 8px;
+  }
+  &__title {
+    font-size: 24px;
+    color: var(--color-surface);
+    margin-bottom: 16px;
+  }
+  &__text {
+    color: var(--color-surface);
+    font-weight: 400;
+    margin-bottom: 16px;
+  }
+}

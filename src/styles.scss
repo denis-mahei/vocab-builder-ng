@@ -1,3 +1,5 @@
+@use "breakpoints" as * ;
+
 @use "reset";
 @use "base";
 @use "tokens";
@@ -10,3 +12,11 @@
 @use "logo";
 @use "utilities";
 
+.add-word-modal-pane {
+  width: 100%;
+  padding-inline: 16px;
+  @include tablet {
+    padding-inline: 0;
+    width: 628px;
+  }
+}

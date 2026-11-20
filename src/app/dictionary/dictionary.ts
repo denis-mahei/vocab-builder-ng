@@ -8,11 +8,13 @@ import {
   distinctUntilChanged,
   EMPTY,
   finalize,
-  switchMap
+  switchMap,
 } from 'rxjs';
 import { WordsTable } from '../shared/words-table/words-table';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Dashboard } from '../shared/dashboard/dashboard';
+import { Dialog } from '@angular/cdk/dialog';
+import { AddWordModal } from './add-word-modal/add-word-modal';
 
 @Component({
   imports: [WordsTable, Dashboard],
@@ -25,6 +27,14 @@ export class Dictionary {
   readonly words = signal<Word[]>([]);
   readonly categories = signal<string[]>([]);
   readonly toStudy = signal<number>(0);
+  private readonly dialog = inject(Dialog);
+
+  addWordDialog(): void {
+    this.dialog.open(AddWordModal, {
+      panelClass: 'add-word-modal-pane',
+      ariaLabelledBy: 'add-word-dialog-title',
+    });
+  }
 
   isLoading = signal(false);
   error = signal<string | null>(null);
