@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { Words } from './words';
-import { Word, WordsParams, WordStatisticsResponse } from '../models';
+import { Word, WordsParams } from '../models';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   catchError,
@@ -8,14 +8,14 @@ import {
   distinctUntilChanged,
   EMPTY,
   finalize,
-  switchMap,
+  switchMap
 } from 'rxjs';
 import { WordsTable } from '../shared/words-table/words-table';
-import { FilterWords } from '../shared/filter-words/filter-words';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Dashboard } from '../shared/dashboard/dashboard';
 
 @Component({
-  imports: [WordsTable, FilterWords],
+  imports: [WordsTable, Dashboard],
   selector: 'app-dictionary',
   styleUrl: './dictionary.scss',
   templateUrl: './dictionary.html',
@@ -24,7 +24,7 @@ export class Dictionary {
   private readonly wordsService = inject(Words);
   readonly words = signal<Word[]>([]);
   readonly categories = signal<string[]>([]);
-  readonly toStudy = signal<number>(0)
+  readonly toStudy = signal<number>(0);
 
   isLoading = signal(false);
   error = signal<string | null>(null);
@@ -45,7 +45,7 @@ export class Dictionary {
     this.isLoading.set(true);
     this.error.set(null);
 
-    this.loadStatistics()
+    this.loadStatistics();
 
     this.wordsService.fetchCategories().subscribe({
       next: (category) => this.categories.set(category),
@@ -59,7 +59,7 @@ export class Dictionary {
           return (
             prev.term?.trim() === curr.term?.trim() &&
             prev.category === curr.category &&
-              prev.isIrregular === curr.isIrregular
+            prev.isIrregular === curr.isIrregular
           );
         }),
         switchMap(({ term, category, isIrregular }) => {
@@ -67,7 +67,7 @@ export class Dictionary {
           const params: WordsParams = {
             page: 1,
             limit: 7,
-            ...(category === 'verb' ? {isIrregular} : {}),
+            ...(category === 'verb' ? { isIrregular } : {}),
             ...(category ? { category } : {}),
             ...(keyword ? { keyword } : {}),
           };

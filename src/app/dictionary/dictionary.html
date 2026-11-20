@@ -1,12 +1,22 @@
 @if (error()) {
-  <p class="dictionary dictionary--error" role="alert">{{ error() }}</p>
+  <p class="dictionary__status dictionary__status--error" role="alert">{{ error() }}</p>
 } @else if (isLoading()) {
-  <p class="dictionary dictionary--loading" role="status">Loading...</p>
+  <p class="dictionary__status dictionary__status--loading" role="status">Loading...</p>
 } @else {
   <div class="container">
-    <app-filter-words [form]="searchWords" [categories]="categories()"/>
-    <p>To study: {{toStudy()}}</p>
-    <app-words-table [words]="words()"/>
+    <app-dashboard
+      [categories]="categories()"
+      [form]="searchWords"
+      [toStudy]="toStudy()"
+      class="dictionary__dashboard"
+    >
+      <button type="button" class="text-btn">
+        Add word
+        <svg width="20" height="20" class="text-btn__icon" aria-hidden="true">
+          <use href="/icons/sprite.svg#add"></use>
+        </svg>
+      </button>
+    </app-dashboard>
+    <app-words-table [words]="words()" />
   </div>
 }
-

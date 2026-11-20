@@ -1,0 +1,15 @@
+<app-filter-words [form]="form()" [categories]="categories()" />
+<div class="panel">
+  <p class="panel__text">
+    To study: <span class="panel__count">{{ toStudy() }}</span>
+  </p>
+  <div class="panel__inner">
+    <ng-content />
+    <a routerLink="/training" class="text-btn">
+      Train oneself
+      <svg width="20" height="20" aria-hidden="true" class="text-btn__icon">
+          <use href="/icons/sprite.svg#arrow"></use>
+      </svg>
+    </a>
+  </div>
+</div>

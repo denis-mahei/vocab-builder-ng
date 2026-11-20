@@ -32,3 +32,17 @@
     cursor: not-allowed;
   }
 }
+
+.text-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  &__icon {
+    color: var(--color-accent);
+  }
+  &:focus-visible {
+    outline: 3px solid var(--color-accent-hover);
+    outline-offset: 3px;
+    border-radius: 8px;
+  }
+}

@@ -17,7 +17,7 @@
     <select id="category" formControlName="category" class="input filters__select">
       <option value="">Categories</option>
       @for (c of categories(); track c) {
-        <option [value]="c">{{ c }}</option>
+        <option [value]="c">{{ c | titlecase }}</option>
       }
     </select>
     <svg width="20" height="20" aria-hidden="true" class="filters__icon filters__chevron">

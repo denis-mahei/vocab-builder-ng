@@ -1,0 +1,49 @@
+@use 'breakpoints' as *;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  @include tablet {
+    gap: 28px;
+  }
+  @include desktop {
+    gap: 0;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  &__inner {
+    display: flex;
+    gap: 16px;
+  }
+
+  &__text {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    @include tablet {
+      font-size: 16px;
+    }
+  }
+
+  &__count {
+    font-size: 20px;
+    color: var(--color-text);
+  }
+
+  @include tablet {
+    gap: 16px;
+    align-items: center;
+    flex-direction: row;
+  }
+}

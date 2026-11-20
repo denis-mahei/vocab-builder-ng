@@ -1,10 +1,23 @@
+@use "breakpoints" as *;
+
 .dictionary {
-  text-align: center;
-  padding: 10px;
-  font-size: 24px;
+  &__dashboard {
+    margin: 32px 0;
+    @include tablet {
+      margin: 80px 0 28px;
+    }
+  }
+
+  &__status {
+    text-align: center;
+    padding: 10px;
+    font-size: 24px;
+  }
+
   &--error {
     color: var(--color-error);
   }
+
   &--loading {
     color: var(--color-accent);
   }

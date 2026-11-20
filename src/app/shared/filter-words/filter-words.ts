@@ -1,8 +1,9 @@
 import { Component, input } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { TitleCasePipe } from '@angular/common';
 
 @Component({
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, TitleCasePipe],
   selector: 'app-filter-words',
   styleUrl: './filter-words.scss',
   templateUrl: './filter-words.html',
