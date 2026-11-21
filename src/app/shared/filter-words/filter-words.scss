@@ -6,67 +6,12 @@
   gap: 8px;
   width: 100%;
 
-  &__radio-group {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-    &__radio {
-      appearance: none;
-      -webkit-appearance: none;
-      margin: 0;
-      width: 18px;
-      height: 18px;
-      border: 2.5px solid var(--color-border);
-      border-radius: 50%;
-      background-color: transparent;
-      display: grid;
-      place-content: center;
-      cursor: pointer;
-      transition: border-color 0.2s ease;
-    }
-
-    &__radio::before {
-      content: "";
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background-color: var(--color-accent);
-      transform: scale(0);
-      transition: transform 0.15s ease-in-out;
-    }
-
-    &__radio:checked {
-      border-color: var(--color-accent);
-    }
-
-    &__radio:checked::before {
-      transform: scale(1);
-    }
-
-    &__radio:focus-visible {
-      outline: 2px solid var(--color-focus-ring);
-      outline-offset: 2px;
-    }
-
-    &__radio-label {
-      cursor: pointer;
-      font-size: 14px;
-      user-select: none;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-
-
   @include tablet {
     flex-direction: row;
     align-items: center;
   }
 
-  &__search-wrapper,
-  &__select-wrapper {
+  &__search-wrapper{
     position: relative;
   }
 
@@ -88,78 +33,6 @@
     right: 24px;
     translate: 0 -50%;
     pointer-events: none;
-  }
-
-  &__chevron {
-    color: var(--color-accent);
-    transition: rotate 0.2s ease-in-out;
-  }
-
-  &__select {
-    appearance: none;
-    height: 48px;
-    padding: 12px 52px 12px 24px;
-    border-radius: 15px;
-    background-color: transparent;
-    cursor: pointer;
-
-    @include tablet {
-      width: 164px;
-    }
-  }
-}
-
-@supports (appearance: base-select) {
-  .filters__select,
-  .filters__select::picker(select) {
-    appearance: base-select;
-  }
-
-  .filters__select::picker-icon {
-    display: none;
-  }
-
-  .filters__select-wrapper:has(.filters__select:open) .filters__chevron {
-    rotate: 180deg;
-  }
-
-  .filters__select::picker(select) {
-    margin-top: 8px;
-    padding: 12px 24px;
-    max-height: 270px;
-    overflow-y: auto;
-    border: none;
-    border-radius: 15px;
-    background-color: var(--color-white);
-    box-shadow: 0 12px 28px #26213926;
-  }
-
-  .filters__select option {
-    padding: 0;
-    color: var(--color-text-muted);
-    cursor: pointer;
-
-    &:not(:last-child) {
-      margin-bottom: 8px;
-    }
-
-    &:hover {
-      color: var(--color-text);
-      background: transparent;
-    }
-
-    &:checked {
-      color: var(--color-accent);
-    }
-
-    &:focus-visible {
-      outline: 2px solid var(--color-focus-ring);
-      outline-offset: -2px;
-    }
-
-    &::checkmark {
-      display: none;
-    }
   }
 }
 

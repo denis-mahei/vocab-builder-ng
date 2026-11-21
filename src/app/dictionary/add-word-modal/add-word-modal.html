@@ -14,36 +14,9 @@
   language base and expanding the vocabulary.
 </p>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <select formControlName="category">
-    @for (c of data.categories; track c) {
-      <option [value]="c">{{ c | titlecase }}</option>
-    }
-  </select>
-  @if (isVerb) {
-    <fieldset class="filters__radio-group">
-      <legend class="visually-hidden">Verb type</legend>
-      <label class="filters__radio-label">
-        <input
-          class="filters__radio"
-          type="radio"
-          formControlName="isIrregular"
-          [value]="false"
-        />
-        Regular
-      </label>
-      <label class="filters__radio-label">
-        <input
-          class="filters__radio"
-          type="radio"
-          formControlName="isIrregular"
-          [value]="true"
-        />
-        Irregular
-      </label>
-      @if (form.controls['isIrregular'].value) {
-        <p>Such data must be entered in the format I form-II form-III form.</p>
-      }
-    </fieldset>
+  <app-category-picker [form]="form" [categories]="data.categories"/>
+  @if (showHint) {
+    <p>Such data must be entered in the format I form-II form-III form.</p>
   }
   <div>
     <label for="ua-word">

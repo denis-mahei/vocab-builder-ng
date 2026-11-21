@@ -6,10 +6,10 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { TitleCasePipe } from '@angular/common';
+import { CategoryPicker } from '../../shared/category-picker/category-picker';
 
 @Component({
-  imports: [ReactiveFormsModule, TitleCasePipe],
+  imports: [ReactiveFormsModule, CategoryPicker],
   selector: 'app-add-word-modal',
   styleUrl: './add-word-modal.scss',
   templateUrl: './add-word-modal.html',
@@ -53,11 +53,7 @@ export class AddWordModal {
     console.log(this.form.getRawValue());
   }
 
-  get isVerb(): boolean {
-    return this.form.controls["category"].value === 'verb';
-  }
-
-  inputError(lang: 'ua' | 'en') {
+  inputError(lang: 'ua' | 'en'):boolean {
     return (
       this.form.controls[lang].invalid &&
       (this.form.controls[lang].dirty || this.form.controls[lang].touched)
@@ -65,5 +61,12 @@ export class AddWordModal {
   }
   isError(lang: 'ua' | 'en', option: 'required' | 'pattern') {
     return this.form.controls[lang].hasError(option);
+  }
+
+  get showHint():boolean {
+    return (
+      this.form.controls['isIrregular'].value &&
+      this.form.controls['category'].value === 'verb'
+    );
   }
 }

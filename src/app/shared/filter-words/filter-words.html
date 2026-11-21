@@ -12,39 +12,5 @@
       <use href="/icons/sprite.svg#search"></use>
     </svg>
   </div>
-  <label for="category" class="visually-hidden">Categories</label>
-  <div class="filters__select-wrapper">
-    <select id="category" formControlName="category" class="input filters__select">
-      <option value="">Categories</option>
-      @for (c of categories(); track c) {
-        <option [value]="c">{{ c | titlecase }}</option>
-      }
-    </select>
-    <svg width="20" height="20" aria-hidden="true" class="filters__icon filters__chevron">
-      <use href="/icons/sprite.svg#chevron"></use>
-    </svg>
-  </div>
-  @if (isVerb) {
-    <fieldset class="filters__radio-group">
-      <legend class="visually-hidden">Verb type</legend>
-      <label class="filters__radio-label">
-        <input
-          class="filters__radio"
-          type="radio"
-          formControlName="isIrregular"
-          [value]="false"
-        />
-        Regular
-      </label>
-      <label class="filters__radio-label">
-        <input
-          class="filters__radio"
-          type="radio"
-          formControlName="isIrregular"
-          [value]="true"
-        />
-        Irregular
-      </label>
-    </fieldset>
-  }
+  <app-category-picker [form]="form()" [categories]="categories()"/>
 </form>

@@ -1,9 +1,9 @@
 import { Component, input } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { TitleCasePipe } from '@angular/common';
+import { CategoryPicker } from '../category-picker/category-picker';
 
 @Component({
-  imports: [ReactiveFormsModule, TitleCasePipe],
+  imports: [ReactiveFormsModule, CategoryPicker],
   selector: 'app-filter-words',
   styleUrl: './filter-words.scss',
   templateUrl: './filter-words.html',
@@ -11,8 +11,4 @@ import { TitleCasePipe } from '@angular/common';
 export class FilterWords {
   readonly form = input.required<FormGroup>();
   readonly categories = input.required<string[]>();
-
-  get isVerb(): boolean {
-    return this.form().get('category')?.value === 'verb';
-  }
 }
