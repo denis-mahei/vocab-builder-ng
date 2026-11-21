@@ -1,4 +1,9 @@
-<button type="button" (click)="closeModal()" class="add-word-modal__close" aria-label="Close modal">
+<button
+  type="button"
+  (click)="closeModal()"
+  class="add-word-modal__close"
+  aria-label="Close modal"
+>
   <svg width="24" height="24" aria-hidden="true">
     <use href="/icons/sprite.svg#close"></use>
   </svg>
@@ -8,3 +13,76 @@
   Adding a new word to the dictionary is an important step in enriching the
   language base and expanding the vocabulary.
 </p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <select formControlName="category">
+    @for (c of data.categories; track c) {
+      <option [value]="c">{{ c | titlecase }}</option>
+    }
+  </select>
+  @if (isVerb) {
+    <fieldset class="filters__radio-group">
+      <legend class="visually-hidden">Verb type</legend>
+      <label class="filters__radio-label">
+        <input
+          class="filters__radio"
+          type="radio"
+          formControlName="isIrregular"
+          [value]="false"
+        />
+        Regular
+      </label>
+      <label class="filters__radio-label">
+        <input
+          class="filters__radio"
+          type="radio"
+          formControlName="isIrregular"
+          [value]="true"
+        />
+        Irregular
+      </label>
+      @if (form.controls['isIrregular'].value) {
+        <p>Such data must be entered in the format I form-II form-III form.</p>
+      }
+    </fieldset>
+  }
+  <div>
+    <label for="ua-word">
+      <svg aria-hidden="true">
+        <use href="/icons/sprite.svg#flag-ua"></use>
+      </svg>
+      Ukrainian
+    </label>
+    <input type="text" id="ua-word" formControlName="ua"/>
+    @if (inputError('ua')) {
+      <div>
+        @if (isError('ua', 'required')) {
+          <p>Enter the word in Ukrainian</p>
+        }
+        @if (isError('ua', 'pattern')) {
+          <p>Use Ukrainian letters only!</p>
+        }
+      </div>
+    }
+  </div>
+  <div>
+    <label for="en-word">
+      <svg aria-hidden="true">
+        <use href="/icons/sprite.svg#flag-uk"></use>
+      </svg>
+      English
+    </label>
+    <input type="text" id="en-word" formControlName="en"/>
+    @if (inputError('en')) {
+      <div>
+        @if (isError('en', 'required')) {
+          <p>Enter the word in English</p>
+        }
+        @if (isError('en', 'pattern')) {
+          <p>Use English letters only</p>
+        }
+      </div>
+    }
+  </div>
+  <button type="submit">Add</button>
+  <button type="button" (click)="closeModal()">Cancel</button>
+</form>

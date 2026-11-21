@@ -33,6 +33,9 @@ export class Dictionary {
     this.dialog.open(AddWordModal, {
       panelClass: 'add-word-modal-pane',
       ariaLabelledBy: 'add-word-dialog-title',
+      data: {
+        categories: this.categories(),
+      },
     });
   }
 
