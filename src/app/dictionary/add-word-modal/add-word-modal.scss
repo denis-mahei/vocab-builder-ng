@@ -1,16 +1,23 @@
+@use "breakpoints" as *;
+
 :host {
-  padding: 16px;
+  padding: 48px 16px;
   display: flex;
   flex-direction: column;
   background-color: var(--color-accent);
   border-radius: 15px;
+  position: relative;
+  @include tablet {
+    padding-inline: 64px;
+  }
 }
 
 .add-word-modal {
   &__close {
-    align-self: flex-end;
     color: var(--color-white);
-    margin-bottom: 8px;
+    position: absolute;
+    top: 16px;
+    right: 16px;
   }
   &__title {
     font-size: 24px;
@@ -21,5 +28,18 @@
     color: var(--color-surface);
     font-weight: 400;
     margin-bottom: 16px;
+  }
+  &__hint {
+    font-size: 10px;
+    color: var(--color-surface);
+    margin-top: 8px;
+    line-height: 1.2;
+    font-weight: 400;
+  }
+  @include tablet {
+    &__close {
+      top: 20px;
+      right: 20px;
+    }
   }
 }

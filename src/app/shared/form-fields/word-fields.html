@@ -1,0 +1,54 @@
+<div [formGroup]="form()" class="word-fields">
+  <div class="word-fields__wrapper">
+    <label for="ua-word" class="word-fields__label">
+      <svg aria-hidden="true" class="word-fields__icon">
+        <use href="/icons/sprite.svg#flag-ua"></use>
+      </svg>
+      Ukrainian
+    </label>
+    <div class="word-fields__input">
+      <input
+        type="text"
+        id="ua-word"
+        formControlName="ua"
+        class="input input--modal"
+      />
+      @if (inputError('ua')) {
+        <div>
+          @if (isError('ua', 'required')) {
+            <p>Enter the word in Ukrainian</p>
+          }
+          @if (isError('ua', 'pattern')) {
+            <p>Use Ukrainian letters only!</p>
+          }
+        </div>
+      }
+    </div>
+  </div>
+  <div class="word-fields__wrapper">
+    <label for="en-word" class="word-fields__label">
+      <svg aria-hidden="true" class="word-fields__icon">
+        <use href="/icons/sprite.svg#flag-uk"></use>
+      </svg>
+      English
+    </label>
+    <div class="word-fields__input">
+      <input
+        type="text"
+        id="en-word"
+        formControlName="en"
+        class="input input--modal"
+      />
+      @if (inputError('en')) {
+        <div>
+          @if (isError('en', 'required')) {
+            <p>Enter the word in English</p>
+          }
+          @if (isError('en', 'pattern')) {
+            <p>Use English letters only</p>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</div>

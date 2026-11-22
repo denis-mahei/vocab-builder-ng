@@ -11,6 +11,8 @@ import { TitleCasePipe } from '@angular/common';
 export class CategoryPicker {
   form = input.required<FormGroup>();
   categories = input.required<string[]>();
+  direction = input<'row' | 'column'>('column');
+  variant = input<'default' | 'inverse'>('default');
 
   get isVerb(): boolean {
     return this.form().controls['category'].value === 'verb';

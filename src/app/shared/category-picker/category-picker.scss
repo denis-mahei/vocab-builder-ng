@@ -10,6 +10,7 @@
     align-items: center;
     gap: 16px;
   }
+
   &__radio {
     appearance: none;
     -webkit-appearance: none;
@@ -57,15 +58,20 @@
     gap: 8px;
   }
 
-  @include tablet {
-    flex-direction: row;
-    align-items: center;
+  &--row {
+    @include tablet {
+      flex-direction: row;
+      align-items: center;
+    }
   }
 
   &__select-wrapper {
     position: relative;
+    @include tablet {
+      width: 164px;
+    }
   }
-  
+
   &__icon {
     position: absolute;
     top: 50%;
@@ -86,10 +92,25 @@
     border-radius: 15px;
     background-color: transparent;
     cursor: pointer;
-
-    @include tablet {
-      width: 164px;
-    }
+  }
+  &--inverse &__select {
+    color: var(--color-surface);
+    border-color: var(--color-border-modal);
+  }
+  &--inverse &__chevron {
+    color: var(--color-surface);
+  }
+  &--inverse &__radio {
+    border-color: color-mix(in srgb, var(--color-surface) 20%, transparent);
+  }
+  &--inverse &__radio-label {
+    color: var(--color-surface);
+  }
+  &--inverse &__radio::before {
+    background: var(--color-surface);
+  }
+  &--inverse &__radio:checked {
+    border-color: var(--color-surface);
   }
 }
 
@@ -104,7 +125,7 @@
   }
 
   .category-picker__select-wrapper:has(.category-picker__select:open) .category-picker__chevron {
-    rotate: 180deg;
+    rotate: -180deg;
   }
 
   .category-picker__select::picker(select) {

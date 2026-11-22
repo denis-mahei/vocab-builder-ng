@@ -1,13 +1,27 @@
-<div [formGroup]="form()" class="category-picker">
+<div
+  [formGroup]="form()"
+  class="category-picker"
+  [class.category-picker--row]="direction() === 'row'"
+  [class.category-picker--inverse]="variant() === 'inverse'"
+>
   <label for="category" class="visually-hidden">Categories</label>
   <div class="category-picker__select-wrapper">
-    <select id="category" formControlName="category" class="input category-picker__select">
+    <select
+      id="category"
+      formControlName="category"
+      class="input category-picker__select"
+    >
       <option value="">Categories</option>
       @for (c of categories(); track c) {
         <option [value]="c">{{ c | titlecase }}</option>
       }
     </select>
-    <svg width="20" height="20" aria-hidden="true" class="category-picker__icon category-picker__chevron">
+    <svg
+      width="20"
+      height="20"
+      aria-hidden="true"
+      class="category-picker__icon category-picker__chevron"
+    >
       <use href="/icons/sprite.svg#chevron"></use>
     </svg>
   </div>

@@ -7,9 +7,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { CategoryPicker } from '../../shared/category-picker/category-picker';
+import { WordFields } from '../../shared/form-fields/word-fields';
 
 @Component({
-  imports: [ReactiveFormsModule, CategoryPicker],
+  imports: [ReactiveFormsModule, CategoryPicker, WordFields],
   selector: 'app-add-word-modal',
   styleUrl: './add-word-modal.scss',
   templateUrl: './add-word-modal.html',
@@ -49,21 +50,10 @@ export class AddWordModal {
       this.form.markAllAsTouched();
       return;
     }
-
     console.log(this.form.getRawValue());
   }
 
-  inputError(lang: 'ua' | 'en'):boolean {
-    return (
-      this.form.controls[lang].invalid &&
-      (this.form.controls[lang].dirty || this.form.controls[lang].touched)
-    );
-  }
-  isError(lang: 'ua' | 'en', option: 'required' | 'pattern') {
-    return this.form.controls[lang].hasError(option);
-  }
-
-  get showHint():boolean {
+  get showHint(): boolean {
     return (
       this.form.controls['isIrregular'].value &&
       this.form.controls['category'].value === 'verb'

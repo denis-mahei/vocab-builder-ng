@@ -14,48 +14,15 @@
   language base and expanding the vocabulary.
 </p>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <app-category-picker [form]="form" [categories]="data.categories"/>
+  <app-category-picker
+    [form]="form"
+    [categories]="data.categories"
+    variant="inverse"
+  />
   @if (showHint) {
-    <p>Such data must be entered in the format I form-II form-III form.</p>
+    <p class="add-word-modal__hint">Such data must be entered in the format I form-II form-III form.</p>
   }
-  <div>
-    <label for="ua-word">
-      <svg aria-hidden="true">
-        <use href="/icons/sprite.svg#flag-ua"></use>
-      </svg>
-      Ukrainian
-    </label>
-    <input type="text" id="ua-word" formControlName="ua"/>
-    @if (inputError('ua')) {
-      <div>
-        @if (isError('ua', 'required')) {
-          <p>Enter the word in Ukrainian</p>
-        }
-        @if (isError('ua', 'pattern')) {
-          <p>Use Ukrainian letters only!</p>
-        }
-      </div>
-    }
-  </div>
-  <div>
-    <label for="en-word">
-      <svg aria-hidden="true">
-        <use href="/icons/sprite.svg#flag-uk"></use>
-      </svg>
-      English
-    </label>
-    <input type="text" id="en-word" formControlName="en"/>
-    @if (inputError('en')) {
-      <div>
-        @if (isError('en', 'required')) {
-          <p>Enter the word in English</p>
-        }
-        @if (isError('en', 'pattern')) {
-          <p>Use English letters only</p>
-        }
-      </div>
-    }
-  </div>
+  <app-form-fields [form]="form"/>
   <button type="submit">Add</button>
   <button type="button" (click)="closeModal()">Cancel</button>
 </form>
