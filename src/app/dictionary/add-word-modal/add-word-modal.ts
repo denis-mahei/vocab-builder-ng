@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { CategoryPicker } from '../../shared/category-picker/category-picker';
-import { WordFields } from '../../shared/form-fields/word-fields';
+import { WordFields } from '../../shared/word-fields/word-fields';
 
 @Component({
   imports: [ReactiveFormsModule, CategoryPicker, WordFields],

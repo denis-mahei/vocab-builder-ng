@@ -3,7 +3,7 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   imports: [ReactiveFormsModule],
-  selector: 'app-form-fields',
+  selector: 'app-word-fields',
   styleUrl: './word-fields.scss',
   templateUrl: './word-fields.html',
 })
