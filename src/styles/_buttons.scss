@@ -8,11 +8,15 @@
   font-weight: 700;
   width: 100%;
   cursor: pointer;
-  transition: background-color .2s ease-in-out;
+  transition-property: color, background-color;
+  transition-timing-function: ease-in-out;
+  transition-duration: 0.2s;
   border: 1px solid transparent;
+
   @include tablet {
     height: 60px;
   }
+
   &--primary {
     color: var(--color-surface);
     background-color: var(--color-accent);
@@ -26,7 +30,41 @@
       outline-offset: 2px;
     }
   }
-
+  &--primary-inverse {
+    background-color: var(--color-surface);
+    &:hover {
+      color: var(--color-accent);
+    }
+    &:focus-visible {
+      outline: 3px solid var(--color-surface);
+      outline-offset: 2px;
+    }
+  }
+  &--secondary-inverse {
+    border-color: color-mix(in srgb, var(--color-surface) 40%, transparent);
+    color: var(--color-surface);
+    &:hover {
+      background-color: var(--color-surface);
+      color: var(--color-text);
+    }
+    &:focus-visible {
+      outline: 3px solid var(--color-surface);
+      outline-offset: 2px;
+    }
+  }
+  &--secondary {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    background: transparent;
+    &:hover {
+      background-color: var(--color-accent);
+      color: var(--color-surface);
+    }
+    &:focus-visible {
+      outline: 3px solid var(--color-accent-hover);
+      outline-offset: 2px;
+    }
+  }
   &:disabled {
     background-color: var(--color-disabled);
     cursor: not-allowed;

@@ -36,10 +36,21 @@
     line-height: 1.2;
     font-weight: 400;
   }
+  &__buttons {
+    display: flex;
+    gap: 10px;
+  }
+  &__word-fields {
+    display: block;
+    margin: 32px 0;
+  }
   @include tablet {
     &__close {
       top: 20px;
       right: 20px;
+    }
+    &__word-fields {
+      margin: 38px 0 32px;
     }
   }
 }

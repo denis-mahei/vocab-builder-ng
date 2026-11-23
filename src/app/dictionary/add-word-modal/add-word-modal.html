@@ -22,7 +22,9 @@
   @if (showHint) {
     <p class="add-word-modal__hint">Such data must be entered in the format I form-II form-III form.</p>
   }
-  <app-form-fields [form]="form"/>
-  <button type="submit">Add</button>
-  <button type="button" (click)="closeModal()">Cancel</button>
+  <app-word-fields [form]="form" class="add-word-modal__word-fields"/>
+  <div class="add-word-modal__buttons">
+    <button type="submit" class="btn btn--primary-inverse">Add</button>
+    <button type="button" class="btn btn--secondary-inverse" (click)="closeModal()">Cancel</button>
+  </div>
 </form>

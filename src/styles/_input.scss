@@ -59,6 +59,10 @@
   &--modal {
     border-color: var(--color-border-modal);
     color: var(--color-surface);
+    &:hover {
+      border-color: var(--color-surface);
+    }
+
     &:focus {
       border-color: var(--color-white);
     }

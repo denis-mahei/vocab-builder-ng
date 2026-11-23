@@ -96,6 +96,13 @@
   &--inverse &__select {
     color: var(--color-surface);
     border-color: var(--color-border-modal);
+    &:hover {
+      border-color: var(--color-surface);
+    }
+    &:focus-visible {
+      outline: 3px solid var(--color-surface);
+      outline-offset: 2px;
+    }
   }
   &--inverse &__chevron {
     color: var(--color-surface);
@@ -111,6 +118,10 @@
   }
   &--inverse &__radio:checked {
     border-color: var(--color-surface);
+  }
+  &--inverse &__radio:focus-visible {
+    outline: 2px solid var(--color-surface);
+    outline-offset: 2px;
   }
 }
 
