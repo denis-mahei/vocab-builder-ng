@@ -8,6 +8,8 @@ import {
 } from '@angular/forms';
 import { CategoryPicker } from '../../shared/category-picker/category-picker';
 import { WordFields } from '../../shared/word-fields/word-fields';
+import { Words } from '../words';
+import { WordRequest } from '../../models';
 
 @Component({
   imports: [ReactiveFormsModule, CategoryPicker, WordFields],
@@ -18,13 +20,14 @@ import { WordFields } from '../../shared/word-fields/word-fields';
 export class AddWordModal {
   dialogRef = inject<DialogRef>(DialogRef);
   data = inject(DIALOG_DATA);
+  private readonly wordService = inject(Words);
 
   closeModal(): void {
     this.dialogRef.close();
   }
 
   form = new FormGroup({
-    category: new FormControl('verb', {
+    category: new FormControl('', {
       nonNullable: true,
       validators: [Validators.required],
     }),
@@ -45,12 +48,24 @@ export class AddWordModal {
     }),
   });
 
+  addWord(word: WordRequest) {
+    return this.wordService.createWord(word).subscribe({
+      next: (created) => this.dialogRef.close(created),
+    });
+  }
+
   onSubmit() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
-    console.log(this.form.getRawValue());
+    const { isIrregular, ...rest } = this.form.getRawValue();
+    this.addWord({
+      ...rest,
+      ...(rest.category === 'verb'
+        ? { isIrregular }
+        : {}),
+    });
   }
 
   get showHint(): boolean {

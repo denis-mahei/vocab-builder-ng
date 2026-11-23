@@ -55,3 +55,4 @@ export type WordsParams = {
 export interface WordStatisticsResponse  {
   totalCount: number;
 }
+

@@ -30,17 +30,37 @@ export class Dictionary {
   private readonly dialog = inject(Dialog);
 
   addWordDialog(): void {
-    this.dialog.open(AddWordModal, {
+    const dialogRef = this.dialog.open(AddWordModal, {
       panelClass: 'add-word-modal-pane',
       ariaLabelledBy: 'add-word-dialog-title',
       data: {
         categories: this.categories(),
       },
     });
+    dialogRef.closed.subscribe((result) => {
+      console.log('Result:', result);
+    });
   }
 
   isLoading = signal(false);
   error = signal<string | null>(null);
+
+  private buildParams(params: {
+    term?: string;
+    category?: string;
+    isIrregular?: boolean;
+  }): WordsParams {
+    const query = params.term?.trim();
+    return {
+      page: 1,
+      limit: 7,
+      ...(query ? { keyword: query } : {}),
+      ...(params.category ? { category: params.category } : {}),
+      ...(params.category === 'verb'
+        ? { isIrregular: params.isIrregular }
+        : {}),
+    };
+  }
 
   loadStatistics() {
     this.wordsService.fetchStatistics().subscribe({
@@ -75,21 +95,12 @@ export class Dictionary {
             prev.isIrregular === curr.isIrregular
           );
         }),
-        switchMap(({ term, category, isIrregular }) => {
-          const keyword = term?.trim();
-          const params: WordsParams = {
-            page: 1,
-            limit: 7,
-            ...(category === 'verb' ? { isIrregular } : {}),
-            ...(category ? { category } : {}),
-            ...(keyword ? { keyword } : {}),
-          };
-          return this.wordsService
-            .fetchOwnWords(params)
-            .pipe(catchError(() => EMPTY));
-        }),
+        switchMap((filters) =>
+          this.wordsService.fetchOwnWords(this.buildParams(filters)),
+        ),
         takeUntilDestroyed(),
       )
+      .pipe(catchError(() => EMPTY))
       .subscribe(({ results }) => {
         this.words.set(results);
       });
