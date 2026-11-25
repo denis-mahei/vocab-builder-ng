@@ -12,5 +12,5 @@ import { RouterLink } from '@angular/router';
 export class Dashboard {
   readonly form = input.required<FormGroup>();
   readonly categories = input.required<string[]>();
-  readonly toStudy = input.required<number>();
+  readonly toStudy = input.required<number | null>();
 }

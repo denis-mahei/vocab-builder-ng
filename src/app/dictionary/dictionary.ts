@@ -34,7 +34,7 @@ export class Dictionary {
   private readonly dialog = inject(Dialog);
   readonly words = signal<Word[]>([]);
   readonly categories = signal<string[]>([]);
-  readonly toStudy = signal<number>(0);
+  readonly toStudy = signal<number | null>(null);
   isLoading = signal(true);
   error = signal<string | null>(null);
   readonly searchWords = new FormGroup({
@@ -82,7 +82,7 @@ export class Dictionary {
   }
   constructor() {
     this.loadStatistics();
-    
+
     this.wordsService.fetchCategories().subscribe({
       next: (category) => this.categories.set(category),
       error: () => this.error.set('Oops, something went wrong'),
