@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { Words } from './words';
-import { Word, WordsParams } from '../models';
+import { Word, WordsParams, WordsResponse } from '../models';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   catchError,
@@ -8,7 +8,13 @@ import {
   distinctUntilChanged,
   EMPTY,
   finalize,
+  map,
+  merge,
+  Observable,
+  startWith,
+  Subject,
   switchMap,
+  tap,
 } from 'rxjs';
 import { WordsTable } from '../shared/words-table/words-table';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -23,11 +29,25 @@ import { AddWordModal } from './add-word-modal/add-word-modal';
   templateUrl: './dictionary.html',
 })
 export class Dictionary {
+  private readonly reload$ = new Subject<void>();
   private readonly wordsService = inject(Words);
+  private readonly dialog = inject(Dialog);
   readonly words = signal<Word[]>([]);
   readonly categories = signal<string[]>([]);
   readonly toStudy = signal<number>(0);
-  private readonly dialog = inject(Dialog);
+  isLoading = signal(true);
+  error = signal<string | null>(null);
+  readonly searchWords = new FormGroup({
+    term: new FormControl('', { nonNullable: true }),
+    category: new FormControl('', { nonNullable: true }),
+    isIrregular: new FormControl(false, { nonNullable: true }),
+  });
+
+  loadStatistics() {
+    this.wordsService.fetchStatistics().subscribe({
+      next: (total) => this.toStudy.set(total.totalCount),
+    });
+  }
 
   addWordDialog(): void {
     const dialogRef = this.dialog.open(AddWordModal, {
@@ -38,12 +58,11 @@ export class Dictionary {
       },
     });
     dialogRef.closed.subscribe((result) => {
-      console.log('Result:', result);
+      if (!result) return;
+      this.loadStatistics();
+      this.reload$.next();
     });
   }
-
-  isLoading = signal(false);
-  error = signal<string | null>(null);
 
   private buildParams(params: {
     term?: string;
@@ -61,67 +80,43 @@ export class Dictionary {
         : {}),
     };
   }
-
-  loadStatistics() {
-    this.wordsService.fetchStatistics().subscribe({
-      next: (total) => this.toStudy.set(total.totalCount),
-    });
-  }
-
-  searchWords = new FormGroup({
-    term: new FormControl('', { nonNullable: true }),
-    category: new FormControl('', { nonNullable: true }),
-    isIrregular: new FormControl(false, { nonNullable: true }),
-  });
-
   constructor() {
-    this.isLoading.set(true);
-    this.error.set(null);
-
     this.loadStatistics();
-
+    
     this.wordsService.fetchCategories().subscribe({
       next: (category) => this.categories.set(category),
       error: () => this.error.set('Oops, something went wrong'),
     });
 
-    this.searchWords.valueChanges
+    const filters$ = this.searchWords.valueChanges.pipe(
+      debounceTime(200),
+      distinctUntilChanged((prev, curr) => {
+        return (
+          prev.term?.trim() === curr.term?.trim() &&
+          prev.category === curr.category &&
+          prev.isIrregular === curr.isIrregular
+        );
+      }),
+    );
+    const refreshed$ = this.reload$.pipe(
+      map(() => this.searchWords.getRawValue()),
+    );
+    merge(filters$, refreshed$)
       .pipe(
-        debounceTime(200),
-        distinctUntilChanged((prev, curr) => {
-          return (
-            prev.term?.trim() === curr.term?.trim() &&
-            prev.category === curr.category &&
-            prev.isIrregular === curr.isIrregular
-          );
-        }),
-        switchMap((filters) =>
-          this.wordsService.fetchOwnWords(this.buildParams(filters)),
+        startWith(this.searchWords.getRawValue()),
+        map((filters): WordsParams => this.buildParams(filters)),
+        tap(() => this.error.set(null)),
+        switchMap((params): Observable<WordsResponse> =>
+          this.wordsService.fetchOwnWords(params).pipe(
+            catchError(() => {
+              this.error.set('Oops, something went wrong');
+              return EMPTY;
+            }),
+            finalize(() => this.isLoading.set(false)),
+          ),
         ),
         takeUntilDestroyed(),
       )
-      .pipe(catchError(() => EMPTY))
-      .subscribe(({ results }) => {
-        this.words.set(results);
-      });
-
-    this.wordsService
-      .fetchOwnWords({
-        page: 1,
-        limit: 7,
-      })
-      .pipe(
-        finalize(() => {
-          this.isLoading.set(false);
-        }),
-        takeUntilDestroyed(),
-      )
-      .subscribe({
-        next: ({ results }) => this.words.set(results),
-        error: (err) => {
-          this.error.set('Oops! Something went wrong!');
-          console.error(err.message);
-        },
-      });
+      .subscribe(({ results }: { results: Word[] }) => this.words.set(results));
   }
 }

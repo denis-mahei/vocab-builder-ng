@@ -1,22 +1,26 @@
-@if (error()) {
-  <p class="dictionary__status dictionary__status--error" role="alert">{{ error() }}</p>
-} @else if (isLoading()) {
-  <p class="dictionary__status dictionary__status--loading" role="status">Loading...</p>
-} @else {
-  <div class="container">
-    <app-dashboard
-      [categories]="categories()"
-      [form]="searchWords"
-      [toStudy]="toStudy()"
-      class="dictionary__dashboard"
-    >
-      <button type="button" class="text-btn" (click)="addWordDialog()">
-        Add word
-        <svg width="20" height="20" class="text-btn__icon" aria-hidden="true">
-          <use href="/icons/sprite.svg#add"></use>
-        </svg>
-      </button>
-    </app-dashboard>
+<div class="container">
+  <app-dashboard
+    [categories]="categories()"
+    [form]="searchWords"
+    [toStudy]="toStudy()"
+    class="dictionary__dashboard"
+  >
+    <button type="button" class="text-btn" (click)="addWordDialog()">
+      Add word
+      <svg width="20" height="20" class="text-btn__icon" aria-hidden="true">
+        <use href="/icons/sprite.svg#add"></use>
+      </svg>
+    </button>
+  </app-dashboard>
+  @if (isLoading()) {
+    <p class="dictionary__status dictionary__status--loading" role="status">
+      Loading...
+    </p>
+  } @else if (error()) {
+    <p class="dictionary__status dictionary__status--error" role="alert">
+      {{ error() }}
+    </p>
+  } @else {
     <app-words-table [words]="words()" />
-  </div>
-}
+  }
+</div>
