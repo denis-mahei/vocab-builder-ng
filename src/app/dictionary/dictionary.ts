@@ -21,9 +21,10 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Dashboard } from '../shared/dashboard/dashboard';
 import { Dialog } from '@angular/cdk/dialog';
 import { AddWordModal } from './add-word-modal/add-word-modal';
+import { Pagination } from '../shared/pagination/pagination';
 
 @Component({
-  imports: [WordsTable, Dashboard],
+  imports: [WordsTable, Dashboard, Pagination],
   selector: 'app-dictionary',
   styleUrl: './dictionary.scss',
   templateUrl: './dictionary.html',
@@ -35,13 +36,22 @@ export class Dictionary {
   readonly words = signal<Word[]>([]);
   readonly categories = signal<string[]>([]);
   readonly toStudy = signal<number | null>(null);
+  readonly totalPages = signal<number>(1);
+  readonly pageNumber = signal<number>(1);
+
   isLoading = signal(true);
   error = signal<string | null>(null);
+
   readonly searchWords = new FormGroup({
     term: new FormControl('', { nonNullable: true }),
     category: new FormControl('', { nonNullable: true }),
     isIrregular: new FormControl(false, { nonNullable: true }),
   });
+
+  onPageChange(page: number) {
+    this.pageNumber.set(page)
+    this.reload$.next()
+  }
 
   loadStatistics() {
     this.wordsService.fetchStatistics().subscribe({
@@ -71,7 +81,7 @@ export class Dictionary {
   }): WordsParams {
     const query = params.term?.trim();
     return {
-      page: 1,
+      page: this.pageNumber(),
       limit: 7,
       ...(query ? { keyword: query } : {}),
       ...(params.category ? { category: params.category } : {}),
@@ -80,6 +90,7 @@ export class Dictionary {
         : {}),
     };
   }
+
   constructor() {
     this.loadStatistics();
 
@@ -98,6 +109,7 @@ export class Dictionary {
         );
       }),
     );
+
     const refreshed$ = this.reload$.pipe(
       map(() => this.searchWords.getRawValue()),
     );
@@ -117,6 +129,9 @@ export class Dictionary {
         ),
         takeUntilDestroyed(),
       )
-      .subscribe(({ results }: { results: Word[] }) => this.words.set(results));
+      .subscribe(({ results, totalPages }) => {
+        this.words.set(results);
+        this.totalPages.set(totalPages);
+      });
   }
 }

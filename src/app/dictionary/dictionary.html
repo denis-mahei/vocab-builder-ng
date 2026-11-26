@@ -22,5 +22,10 @@
     </p>
   } @else {
     <app-words-table [words]="words()" />
+    <app-pagination
+      [page]="pageNumber()"
+      [totalPages]="totalPages()"
+      (pageChange)="onPageChange($event)"
+    />
   }
 </div>
