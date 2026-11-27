@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 
 @Component({
   imports: [],
@@ -7,7 +7,10 @@ import { Component, input, output } from '@angular/core';
   templateUrl: './pagination.html',
 })
 export class Pagination {
-  readonly page = input.required<number>();
+  readonly currPage = input.required<number>();
   readonly totalPages = input.required<number>();
   readonly pageChange = output<number>();
+  readonly pages = computed(() =>
+    Array.from({ length: this.totalPages() }, (_, i) => i + 1),
+  );
 }

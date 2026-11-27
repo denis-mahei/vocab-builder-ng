@@ -1,0 +1,37 @@
+:host {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 48px;
+}
+
+.pagination-btn {
+  border: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
+  border-radius: 8px;
+  cursor: pointer;
+  &__page {
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    transition: background-color .2s ease;
+    &--active {
+      background-color: var(--color-accent);
+      border: none;
+      color: var(--color-white);
+    }
+    &:hover {
+      background-color: var(--color-accent-hover);
+      color: var(--color-white);
+    }
+    &:focus-visible {
+      outline: 3px solid var(--color-focus-ring);
+      outline-offset: 2px;
+    }
+  }
+  &:disabled {
+    cursor: default;
+  }
+}

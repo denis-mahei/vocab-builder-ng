@@ -1,10 +1,12 @@
 @use "breakpoints" as *;
 
 .wrapper {
+  margin-bottom: 32px;
   @include tablet {
     background-color: var(--color-white);
     padding: 18px;
     border-radius: 15px;
+    margin-bottom: 28px;
   }
 }
 

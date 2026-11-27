@@ -1,15 +1,56 @@
 <button
   type="button"
-  (click)="pageChange.emit(page() - 1)"
-  [disabled]="page() === 1"
+  (click)="pageChange.emit(1)"
+  [disabled]="currPage() <= 3"
+  class="pagination-btn pagination-btn__page"
+  aria-label="First page"
 >
-  &lt;
+  <svg width="16" height="16" aria-hidden="true">
+      <use href="/icons/sprite.svg#start"></use>
+  </svg>
 </button>
-<span>...</span>
 <button
+  aria-label="Previous page"
   type="button"
-  (click)="pageChange.emit(page() + 1)"
-  [disabled]="page() >= totalPages()"
+  (click)="pageChange.emit(currPage() - 1)"
+  [disabled]="currPage() === 1"
+  class="pagination-btn pagination-btn__page"
 >
-  &gt;
+  <svg width="16" height="16" aria-hidden="true">
+    <use href="/icons/sprite.svg#prev"></use>
+  </svg>
+</button>
+@for (page of pages(); track page) {
+  <button
+    class="pagination-btn pagination-btn__page"
+    type="button"
+    [aria-current]="currPage() === page ? 'page' : null"
+    (click)="pageChange.emit(page)"
+    [disabled]="currPage() === page"
+    [class.pagination-btn__page--active]="currPage() === page"
+  >
+    {{ page }}
+  </button>
+}
+<button
+  aria-label="Next page"
+  type="button"
+  (click)="pageChange.emit(currPage() + 1)"
+  [disabled]="currPage() >= totalPages()"
+  class="pagination-btn pagination-btn__page"
+>
+  <svg width="16" height="16" aria-hidden="true">
+    <use href="/icons/sprite.svg#next"></use>
+  </svg>
+</button>
+<button
+  aria-label="Last page"
+  type="button"
+  (click)="pageChange.emit(totalPages())"
+  [disabled]="currPage() >= totalPages()"
+  class="pagination-btn pagination-btn__page"
+>
+  <svg width="16" height="16" aria-hidden="true">
+    <use href="/icons/sprite.svg#end"></use>
+  </svg>
 </button>
