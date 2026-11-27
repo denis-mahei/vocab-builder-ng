@@ -9,6 +9,9 @@
   </svg>
 </button>
 <h2 id="add-word-dialog-title" class="add-word-modal__title">Add word</h2>
+@if (error()) {
+  <p style="color: tomato;">{{error()}}</p>
+}
 <p class="add-word-modal__text">
   Adding a new word to the dictionary is an important step in enriching the
   language base and expanding the vocabulary.

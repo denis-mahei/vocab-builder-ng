@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import {
   FormControl,
@@ -10,6 +10,7 @@ import { CategoryPicker } from '../../shared/category-picker/category-picker';
 import { WordFields } from '../../shared/word-fields/word-fields';
 import { Words } from '../words';
 import { WordRequest } from '../../models';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   imports: [ReactiveFormsModule, CategoryPicker, WordFields],
@@ -21,6 +22,7 @@ export class AddWordModal {
   dialogRef = inject<DialogRef>(DialogRef);
   data = inject(DIALOG_DATA);
   private readonly wordService = inject(Words);
+  readonly error = signal<string | null>(null);
 
   closeModal(): void {
     this.dialogRef.close();
@@ -49,8 +51,18 @@ export class AddWordModal {
   });
 
   addWord(word: WordRequest) {
-    return this.wordService.createWord(word).subscribe({
+    this.error.set(null);
+    this.wordService.createWord(word).subscribe({
       next: (created) => this.dialogRef.close(created),
+      error: (err) => {
+        if (err instanceof HttpErrorResponse) {
+          if (err.status === 409) {
+            this.error.set(err.error.message ?? 'Such a word has already exists!');
+          } else {
+            this.error.set('Oops, something went wrong.');
+          }
+        }
+      },
     });
   }
 
@@ -62,9 +74,7 @@ export class AddWordModal {
     const { isIrregular, ...rest } = this.form.getRawValue();
     this.addWord({
       ...rest,
-      ...(rest.category === 'verb'
-        ? { isIrregular }
-        : {}),
+      ...(rest.category === 'verb' ? { isIrregular } : {}),
     });
   }
 
