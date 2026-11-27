@@ -1,3 +1,15 @@
-<button type="button" (click)="pageChange.emit(page() - 1)" [disabled]="page() === 1">&lt;</button>
+<button
+  type="button"
+  (click)="pageChange.emit(page() - 1)"
+  [disabled]="page() === 1"
+>
+  &lt;
+</button>
 <span>...</span>
-<button type="button" (click)="pageChange.emit(page() + 1)" [disabled]="page() === totalPages()">&gt;</button>
+<button
+  type="button"
+  (click)="pageChange.emit(page() + 1)"
+  [disabled]="page() >= totalPages()"
+>
+  &gt;
+</button>

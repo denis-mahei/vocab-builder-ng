@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { Words } from './words';
-import { Word, WordsParams, WordsResponse } from '../models';
+import { Word, WordsParams } from '../models';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   catchError,
@@ -10,7 +10,6 @@ import {
   finalize,
   map,
   merge,
-  Observable,
   startWith,
   Subject,
   switchMap,
@@ -49,8 +48,8 @@ export class Dictionary {
   });
 
   onPageChange(page: number) {
-    this.pageNumber.set(page)
-    this.reload$.next()
+    this.pageNumber.set(page);
+    this.reload$.next();
   }
 
   loadStatistics() {
@@ -108,6 +107,7 @@ export class Dictionary {
           prev.isIrregular === curr.isIrregular
         );
       }),
+      tap(() => this.pageNumber.set(1)),
     );
 
     const refreshed$ = this.reload$.pipe(
@@ -118,7 +118,7 @@ export class Dictionary {
         startWith(this.searchWords.getRawValue()),
         map((filters): WordsParams => this.buildParams(filters)),
         tap(() => this.error.set(null)),
-        switchMap((params): Observable<WordsResponse> =>
+        switchMap((params) =>
           this.wordsService.fetchOwnWords(params).pipe(
             catchError(() => {
               this.error.set('Oops, something went wrong');

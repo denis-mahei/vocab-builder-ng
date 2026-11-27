@@ -7,8 +7,7 @@ import { Component, input, output } from '@angular/core';
   templateUrl: './pagination.html',
 })
 export class Pagination {
-  readonly page = input.required<number>()
-  readonly totalPages = input.required<number>()
-  readonly pageChange = output<number>()
-
+  readonly page = input.required<number>();
+  readonly totalPages = input.required<number>();
+  readonly pageChange = output<number>();
 }
