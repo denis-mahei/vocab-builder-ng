@@ -1,9 +1,9 @@
-@use "breakpoints" as *;
+@use 'breakpoints' as *;
 
 :host {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 12px;
   @include tablet {
     gap: 140px;
   }
@@ -22,18 +22,23 @@
 .auth-content {
   display: flex;
   flex-direction: column;
-  gap: 96px;
-
-  .content-img {
-    display: none;
-  }
+  gap: 8px;
 
   .card {
+    margin-top: auto;
     background-color: var(--color-bg-accent);
-    border-radius: 30px;
     padding: 32px 16px;
+    border-radius: 30px 30px 0 0;
     width: 100%;
+
+    @include mobile {
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+    }
     @include tablet {
+      margin-top: 0;
+      margin-left: 0;
+      border-radius: 30px;
       padding: 48px 64px;
       width: 628px;
     }
@@ -41,12 +46,18 @@
 
   @include tablet {
     align-items: center;
+    gap: 96px;
+    .content-img {
+      display: none;
+    }
   }
   @include desktop {
     flex-direction: row;
     gap: 80px;
     .content-img {
       display: block;
+      width: 498px;
+      height: 435px;
     }
   }
 }
@@ -54,8 +65,19 @@
 .img-container {
   flex: 1;
   min-width: 0;
+  @include mobile {
+    align-self: center;
+    order: -1;
+  }
+  @include tablet {
+    order: 1;
+  }
 }
 
 .text {
-  text-align: center;
+  display: none;
+  @include tablet {
+    display: block;
+    text-align: center;
+  }
 }

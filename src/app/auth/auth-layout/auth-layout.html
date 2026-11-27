@@ -16,18 +16,29 @@
       <router-outlet />
     </div>
     <figure class="img-container">
-      <img
-        class="content-img"
-        src="/images/auth/illustration.webp"
-        alt=""
-        srcset="
-          /images/auth/illustration.webp    1x,
-          /images/auth/illustration@2x.webp 2x
-        "
-        loading="lazy"
-        width="498"
-        height="435"
-      />
+      <picture>
+        <source
+          media="(max-width: 767px)"
+          srcset="
+            /images/auth/illustration-mobile.webp,
+            /images/auth/illustration-mobile@2x.webp 2x
+          "
+          width="247px"
+          height="191px"
+        />
+        <img
+          class="content-img"
+          src="/images/auth/illustration.webp"
+          alt=""
+          srcset="
+            /images/auth/illustration.webp,
+            /images/auth/illustration@2x.webp 2x
+          "
+          loading="eager"
+          width="498"
+          height="435"
+        />
+      </picture>
       <figcaption class="text">
         Word · Translation · Grammar · Progress
       </figcaption>
