@@ -1,6 +1,6 @@
 <div [formGroup]="form()" class="word-fields">
   <div class="word-fields__wrapper">
-    <label for="ua-word" class="word-fields__label">
+    <label [for]="`${fieldsId}-ua`" class="word-fields__label">
       <svg aria-hidden="true" class="word-fields__icon">
         <use href="/icons/sprite.svg#flag-ua"></use>
       </svg>
@@ -9,7 +9,7 @@
     <div class="word-fields__input">
       <input
         type="text"
-        id="ua-word"
+        [id]="`${fieldsId}-ua`"
         formControlName="ua"
         class="input input--modal"
       />
@@ -26,7 +26,7 @@
     </div>
   </div>
   <div class="word-fields__wrapper">
-    <label for="en-word" class="word-fields__label">
+    <label [for]="`${fieldsId}-en`" class="word-fields__label">
       <svg aria-hidden="true" class="word-fields__icon">
         <use href="/icons/sprite.svg#flag-uk"></use>
       </svg>
@@ -35,7 +35,7 @@
     <div class="word-fields__input">
       <input
         type="text"
-        id="en-word"
+        [id]="`${fieldsId}-en`"
         formControlName="en"
         class="input input--modal"
       />

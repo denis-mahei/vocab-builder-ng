@@ -4,10 +4,10 @@
   [class.category-picker--row]="direction() === 'row'"
   [class.category-picker--inverse]="variant() === 'inverse'"
 >
-  <label for="category" class="visually-hidden">Categories</label>
+  <label [for]="categoryId" class="visually-hidden">Categories</label>
   <div class="category-picker__select-wrapper">
     <select
-      id="category"
+      [id]="categoryId"
       formControlName="category"
       class="input category-picker__select"
     >

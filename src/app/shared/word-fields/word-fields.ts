@@ -1,5 +1,6 @@
-import { Component, input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { _IdGenerator } from '@angular/cdk/a11y';
 
 @Component({
   imports: [ReactiveFormsModule],
@@ -8,6 +9,7 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
   templateUrl: './word-fields.html',
 })
 export class WordFields {
+  readonly fieldsId = inject(_IdGenerator).getId('word-');
   form = input.required<FormGroup>();
 
   inputError(lang: 'ua' | 'en'): boolean {
